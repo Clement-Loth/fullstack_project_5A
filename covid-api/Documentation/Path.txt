@@ -1,0 +1,30 @@
+/public/center/{town}/ GET
+
+/public/sign/	POST {mail;phone;lastname;firstname;date}
+
+/admin/center/ GET
+/admin/center/town/{town}/ GET
+/admin/center/{center}/ GET
+/admin/center/	POST {centerName,centerTown,centerState}
+/admin/center/{center}/	UPDATE {centerName,centerTown,centerState}
+/admin/center/{center}/  DELETE
+
+/admin/admin/{center}/ GET
+/admin/admin/name/{adminName}/ GET
+/admin/admin/	POST {center,adminName}
+/admin/admin/{adminName}/	UPDATE {center,adminName}
+/admin/admin/{adminName}/	DELETE
+
+/admin/doctor/ GET
+/admin/doctor/{doctorName}/ GET
+/admin/doctor/	POST {doctorName}
+/admin/doctor/	UPDATE {doctorName}
+
+/admin/reservation/ GET
+/admin/reservation/{reservationID}/ GET
+/admin/reservation/{reservationID}/ DELETE
+
+/admin/client/ GET
+/admin/client/{clientName} GET
+/admin/client/{clientName}	UPDATE {clientState}
+
