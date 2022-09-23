@@ -1,4 +1,4 @@
-package org.polytech.covidapi.models;
+package org.polytech.covid.models;
 
 import javax.persistence.Entity;
 
