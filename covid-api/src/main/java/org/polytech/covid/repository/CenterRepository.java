@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CenterRepository extends JpaRepository<CenterJPA, Long> {
     List<CenterJPA> findByName(String name);
+    List<CenterJPA> findByCity(String city);
 }
