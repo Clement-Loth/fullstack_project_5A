@@ -1,5 +1,5 @@
 package org.polytech.covid.entity;
 
-public class SuperAdminJPA {
+public class Appointment {
     
 }
