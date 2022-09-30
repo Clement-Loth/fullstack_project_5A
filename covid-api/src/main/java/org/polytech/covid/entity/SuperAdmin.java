@@ -21,4 +21,23 @@ public class SuperAdmin{
     private String firstName;
     private String lastName;
     
+    public Long getAdmin_id() {
+        return admin_id;
+    }
+    public void setAdmin_id(Long admin_id) {
+        this.admin_id = admin_id;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
 }

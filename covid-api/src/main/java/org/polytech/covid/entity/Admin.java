@@ -24,5 +24,38 @@ public class Admin{
 	@ManyToOne	
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
+
+    public Long getAdmin_id() {
+        return admin_id;
+    }
+
+    public void setAdmin_id(Long admin_id) {
+        this.admin_id = admin_id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Center getCenter() {
+        return center;
+    }
+
+    public void setCenter(Center center) {
+        this.center = center;
+    }
+    
     
 }
