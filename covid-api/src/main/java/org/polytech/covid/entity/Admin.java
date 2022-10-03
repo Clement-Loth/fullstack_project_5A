@@ -1,4 +1,4 @@
-package org.polytech.covid.entity;
+org.polytech.covid.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,12 +25,11 @@ public class Admin{
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
-    public Long getAdmin_id() {
-        return admin_id;
+    public Admin(){
     }
 
-    public void setAdmin_id(Long admin_id) {
-        this.admin_id = admin_id;
+    public Long getAdmin_id() {
+        return admin_id;
     }
 
     public String getFirstName() {
@@ -56,6 +55,4 @@ public class Admin{
     public void setCenter(Center center) {
         this.center = center;
     }
-    
-    
 }

@@ -1,4 +1,5 @@
-package org.polytech.covid.entity;
+org.polytech.covid.entity;
+
 
 import java.util.List;
 
@@ -33,12 +34,12 @@ public class Center{
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
     private List<Appointment> AppointmentList;
 
-    public Long getCenter_id() {
-        return center_id;
+    public Center(){
+        
     }
 
-    public void setCenter_id(Long center_id) {
-        this.center_id = center_id;
+    public Long getCenter_id() {
+        return center_id;
     }
 
     public String getLocation() {

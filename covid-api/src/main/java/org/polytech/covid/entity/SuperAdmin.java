@@ -1,13 +1,10 @@
-package org.polytech.covid.entity;
+org.polytech.covid.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 
@@ -20,12 +17,13 @@ public class SuperAdmin{
 
     private String firstName;
     private String lastName;
-    
+
+    public SuperAdmin(){
+        
+    }
+
     public Long getAdmin_id() {
         return admin_id;
-    }
-    public void setAdmin_id(Long admin_id) {
-        this.admin_id = admin_id;
     }
     public String getFirstName() {
         return firstName;
