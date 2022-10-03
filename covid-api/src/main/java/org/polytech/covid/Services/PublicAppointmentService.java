@@ -1,4 +1,4 @@
-package db.Services;
+package org.polytech.covid.Services;
 
 import java.util.Date;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import db.repositories.CenterRepository;
-import db.Entity.Center;
-import db.repositories.AppointmentRepository;
-import db.Entity.Appointment;
+import org.polytech.covid.repository.CenterRepository;
+import org.polytech.covid.entity.Center;
+import org.polytech.covid.repository.AppointmentRepository;
+import org.polytech.covid.entity.Appointment;
 
 @Service
 public class PublicAppointmentService {

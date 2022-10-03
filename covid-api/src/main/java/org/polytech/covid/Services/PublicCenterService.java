@@ -1,4 +1,4 @@
-package db.Services;
+package org.polytech.covid.Services;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import db.repositories.CenterRepository;
-import db.Entity.Center;
+import org.polytech.covid.repository.CenterRepository;
+import org.polytech.covid.entity.Center;
 
 @Service
 public class PublicCenterService {
