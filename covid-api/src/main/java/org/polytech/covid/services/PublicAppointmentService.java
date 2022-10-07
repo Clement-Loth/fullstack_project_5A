@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.polytech.covid.entities.Appointment;
+
+import org.polytech.covid.repositories.CenterRepository;
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.AppointmentRepository;
-import org.polytech.covid.repositories.CenterRepository;
+import org.polytech.covid.entities.Appointment;
 
 @Service
 public class PublicAppointmentService {

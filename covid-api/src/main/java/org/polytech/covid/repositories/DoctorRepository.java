@@ -10,4 +10,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     List<Doctor> findByFirstName(String firstName);
     List<Doctor> findByLastName(String lastName);    
     List<Doctor> findByCenter(Center center);
+    List<Doctor> findByCenter(String centerName);
 }

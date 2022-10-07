@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin,Long>{
     List<Admin> findByCenter(Center center);
+    List<Admin> findByCenter(String centerName);
     List<Admin> findByFirstName(String firstName);
     List<Admin> findByLastName(String lastName);
 
