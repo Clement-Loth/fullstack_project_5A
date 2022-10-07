@@ -1,10 +1,6 @@
 <div style="display: center; border: 1mm solid lightblue;">
     Our brand new Vaccination Center is : <b>{{center.name}}</b><br/>
     Full address : <b>{{center.address}}, {{center.postalCode}} {{center.city}}</b><br/>
-    <button (click)="clickEvent()">Want to reserve ?</button>
+    <button (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
     <h4 id="kewl"></h4>
-    <div>
-        <label for="name">Center Name:</label>
-        <input type="text" id="name" [(ngModel)]="center.name"/>
-    </div>
 </div>

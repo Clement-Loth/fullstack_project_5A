@@ -9,4 +9,9 @@ export class AppComponent {
   title = 'covid-api';
 
 
+  getRoutePath(){
+    const routepath = window.location.pathname;
+    if(routepath == "/centers") return true;
+    else return false;
+  }
 }
