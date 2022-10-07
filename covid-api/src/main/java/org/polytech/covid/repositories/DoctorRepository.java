@@ -1,9 +1,9 @@
-package org.polytech.covid.repository;
+package org.polytech.covid.repositories;
 
 import java.util.List;
 
-import org.polytech.covid.entity.Center;
-import org.polytech.covid.entity.Doctor;
+import org.polytech.covid.entities.Center;
+import org.polytech.covid.entities.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {

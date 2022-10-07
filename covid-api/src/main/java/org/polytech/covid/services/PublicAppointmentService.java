@@ -1,15 +1,14 @@
-package org.polytech.covid.service;
+package org.polytech.covid.services;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.polytech.covid.repository.CenterRepository;
-import org.polytech.covid.entity.Center;
-import org.polytech.covid.repository.AppointmentRepository;
-import org.polytech.covid.entity.Appointment;
+import org.polytech.covid.entities.Appointment;
+import org.polytech.covid.entities.Center;
+import org.polytech.covid.repositories.AppointmentRepository;
+import org.polytech.covid.repositories.CenterRepository;
 
 @Service
 public class PublicAppointmentService {

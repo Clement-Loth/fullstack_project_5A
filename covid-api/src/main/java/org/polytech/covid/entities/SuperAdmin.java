@@ -1,4 +1,4 @@
-package org.polytech.covid.entity;
+package org.polytech.covid.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

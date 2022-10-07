@@ -1,9 +1,9 @@
-package org.polytech.covid.repository;
+package org.polytech.covid.repositories;
 
 import java.util.List;
 
-import org.polytech.covid.entity.Admin;
-import org.polytech.covid.entity.Center;
+import org.polytech.covid.entities.Admin;
+import org.polytech.covid.entities.Center;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin,Long>{

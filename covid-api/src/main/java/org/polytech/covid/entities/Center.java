@@ -1,4 +1,4 @@
-package org.polytech.covid.entity;
+package org.polytech.covid.entities;
 
 
 import java.util.List;
