@@ -23,6 +23,7 @@ public class Center{
 
     private String location;
     private String name;
+    private String state;
 
 
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Doctor.class, mappedBy="center")
@@ -56,6 +57,14 @@ public class Center{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getState (){
+        return state;
+    }
+
+    public void setState (String state){
+        this.state = state;
     }
 
     public List<Doctor> getDoctorList() {
