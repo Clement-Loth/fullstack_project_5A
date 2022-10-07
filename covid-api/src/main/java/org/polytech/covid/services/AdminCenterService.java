@@ -18,7 +18,11 @@ public class AdminCenterService {
         return centerRep.findAll();
     }
 
-    public List<Center> ListCenterbyCity(String city){
+    public Center getCenter (long id){
+        return centerRep.findById(id).get();
+    }
+
+    public List<Center> ListCenterByCity(String city){
         List<Center> centers =  centerRep.findByCity(city);
         if(centers.size() <1){
             throw new NoSuchElementException("No center in this city!");
@@ -26,7 +30,7 @@ public class AdminCenterService {
         return centers;
     }
 
-    public List<Center> GetCenterByName(String name){
+    public List<Center> ListCenterByName(String name){
         return centerRep.findByName(name);
     }
 

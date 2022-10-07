@@ -18,6 +18,10 @@ public class AdminAppointmentService {
     public List<Appointment> ListAppointmentAll(){
         return appRep.findAll();
     }
+
+    public Appointment getAppointment (long id){
+        return appRep.findById(id).get();
+    }
     
     public List<Appointment> ListAppointmentByFirstName(String firstName){
         List<Appointment> apps = appRep.findByFirstName(firstName);

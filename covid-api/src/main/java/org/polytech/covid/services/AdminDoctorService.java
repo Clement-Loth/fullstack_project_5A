@@ -22,6 +22,10 @@ public class AdminDoctorService {
         return doctorRep.findAll();
     }
 
+    public Doctor getDoctor (long id){
+        return doctorRep.findById(id).get();
+    }
+
     public List<Doctor> ListDoctorByCenter(Center center){
         List<Doctor> Doctors = doctorRep.findByCenter(center);
         if(Doctors.size() <1){

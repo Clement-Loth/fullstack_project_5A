@@ -22,6 +22,10 @@ public class AdminAdminService {
         return adminRep.findAll();
     }
 
+    public Admin getAdmin (long id){
+        return adminRep.findById(id).get();
+    }
+
     public List<Admin> ListAdminByCenter(Center center){
         List<Admin> admins = adminRep.findByCenter(center);
         if(admins.size() <1){
