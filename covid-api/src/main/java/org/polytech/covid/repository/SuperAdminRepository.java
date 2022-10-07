@@ -6,5 +6,6 @@ import org.polytech.covid.entity.SuperAdmin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SuperAdminRepository extends JpaRepository<SuperAdmin,Long>{
-    List<SuperAdmin> findByName(String name);
+    List<SuperAdmin> findByFirstName(String firstName);
+    List<SuperAdmin> findByLastName(String lastName);
 }

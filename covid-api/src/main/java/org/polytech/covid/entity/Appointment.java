@@ -30,14 +30,12 @@ public class Appointment{
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
+    public Appointment (){
+        
+    }
 
     public Long getAppointment_id() {
         return appointment_id;
-    }
-
-
-    public void setAppointment_id(Long appointment_id) {
-        this.appointment_id = appointment_id;
     }
 
 
