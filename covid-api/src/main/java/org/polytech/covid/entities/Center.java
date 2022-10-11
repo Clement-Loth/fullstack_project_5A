@@ -6,15 +6,22 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
-
+@Table(name="CENTERS")
 public class Center{
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,17 +31,19 @@ public class Center{
     private String location;
     private String name;
     private String state;
+    private String city;
 
-/*
-    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Doctor.class, mappedBy="center")
-    private List<Doctor> DoctorList;
 
-    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Admin.class, mappedBy="center")
-    private List<Admin> AdminList;
+    //@OneToMany(cascade={CascadeType.ALL}, targetEntity=Doctor.class, mappedBy="center")
+    //@OneToMany(cascade={CascadeType.ALL}, orphanRemoval = true, mappedBy="center")
+    //private List<Doctor> DoctorList;
 
-    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
-    private List<Appointment> AppointmentList;
-*/
+    // @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Admin.class, mappedBy="center")
+    // private List<Admin> AdminList;
+
+    // @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
+    // private List<Appointment> AppointmentList;
+
     public Center(){
         
     }
@@ -66,31 +75,43 @@ public class Center{
     public void setState (String state){
         this.state = state;
     }
-/*
-    public List<Doctor> getDoctorList() {
-        return DoctorList;
+
+    public String getCity (){
+        return this.city;
     }
 
-    public void setDoctorList(List<Doctor> doctorList) {
-        DoctorList = doctorList;
+    public void setCity (String city){
+        this.city = city;
     }
 
-    public List<Admin> getAdminList() {
-        return AdminList;
-    }
+    // public List<Doctor> getDoctorList() {
+    //     entityManager = Persistence.createEntityManagerFactory(null).createEntityManager();
+    //     return entityManager
+    //          .createQuery("select d from doctors d where d.center_id = :center_id", Doctor.class)
+    //          .setParameter("center_id", center_id)
+    //          .getResultList();
+    // }
 
-    public void setAdminList(List<Admin> adminList) {
-        AdminList = adminList;
-    }
+    // public void setDoctorList(List<Doctor> doctorList) {
+    //     DoctorList = doctorList;
+    // }
 
-    public List<Appointment> getAppointmentList() {
-        return AppointmentList;
-    }
+    // public List<Admin> getAdminList() {
+    //     return AdminList;
+    // }
 
-    public void setAppointmentList(List<Appointment> appointmentList) {
-        AppointmentList = appointmentList;
-    }
-    */
+    // public void setAdminList(List<Admin> adminList) {
+    //     AdminList = adminList;
+    // }
+
+    // public List<Appointment> getAppointmentList() {
+    //     return AppointmentList;
+    // }
+
+    // public void setAppointmentList(List<Appointment> appointmentList) {
+    //     AppointmentList = appointmentList;
+    // }
+    
 }
 
 

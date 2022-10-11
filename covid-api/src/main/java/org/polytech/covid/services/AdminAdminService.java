@@ -27,7 +27,7 @@
 //     }
 
 //     public List<Admin> ListAdminByCenter(Center center){
-//         List<Admin> admins = adminRep.findByCenter(center);
+//         List<Admin> admins = adminRep.findAllByCenter(center);
 //         if(admins.size() <1){
 //             throw new NoSuchElementException("No admins in this center!");
 //         }
@@ -35,7 +35,7 @@
 //     }
 
 //     public List<Admin> ListAdminByCenter(String centerName){
-//         List<Admin> admins = adminRep.findByCenter(centerName);
+//         List<Admin> admins = adminRep.findAllByCenter(centerName);
 //         if(admins.size() <1){
 //             throw new NoSuchElementException("No admins in this center!");
 //         }
@@ -43,7 +43,7 @@
 //     }
 
 //     public List<Admin> ListAdminByFirstName(String firstName){
-//         List<Admin> admins = adminRep.findByFirstName(firstName);
+//         List<Admin> admins = adminRep.findAllByFirstName(firstName);
 //         if(admins.size() <1){
 //             throw new NoSuchElementException("No admin with this first name!");
 //         }
@@ -51,7 +51,7 @@
 //     }
 
 //     public List<Admin> ListAdminByLastName(String lastName){
-//         List<Admin> admins = adminRep.findByLastName(lastName);
+//         List<Admin> admins = adminRep.findAllByLastName(lastName);
 //         if(admins.size() <1){
 //             throw new NoSuchElementException("No admin with this last name!");
 //         }

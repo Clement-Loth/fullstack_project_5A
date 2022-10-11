@@ -18,17 +18,22 @@ public class AdminCenterService {
         return centerRep.findAll();
     }
 
-    public Center getCenter (long id){
-        return centerRep.findById(id).get();
-    }
-
-    // public List<Center> ListCenterByCity(String city){
-    //     List<Center> centers =  centerRep.findByCity(city);
-    //     if(centers.size() <1){
-    //         throw new NoSuchElementException("No center in this city!");
-    //     }
-    //     return centers;
+    // public Center getCenter (long id){
+    //     Center c = centerRep.findById(id).get();
+    //     List<Doctor> = entityManager
+    //     .createQuery("select d from doctors d where d.center_id = :center_id", Doctor.class)
+    //     .setParameter("center_id", center_id)
+    //     .getResultList();
+    //     return c;
     // }
+
+    public List<Center> ListCenterByCity(String city){
+        List<Center> centers =  centerRep.findAllByCity(city);
+        if(centers.size() <1){
+            throw new NoSuchElementException("No center in this city!");
+        }
+        return centers;
+    }
 
     public List<Center> ListCenterByName(String name){
         return centerRep.findAllByName(name);

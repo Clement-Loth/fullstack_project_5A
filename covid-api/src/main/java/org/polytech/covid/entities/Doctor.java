@@ -8,8 +8,10 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Doctors")
 
 public class Doctor{
 
@@ -21,8 +23,10 @@ public class Doctor{
     private String firstName;
     private String lastName;
 
-	@ManyToOne	
-    @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
+	
+	//@ManyToOne(fetch = FetchType.LAZY, foreignKey)
+    @ManyToOne
+    @JoinColumn(name="center_id", nullable=false)
 	private Center center;
 
     public Doctor(){

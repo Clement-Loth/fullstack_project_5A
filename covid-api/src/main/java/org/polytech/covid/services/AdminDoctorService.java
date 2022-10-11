@@ -27,7 +27,7 @@
 //     }
 
 //     public List<Doctor> ListDoctorByCenter(Center center){
-//         List<Doctor> Doctors = doctorRep.findByCenter(center);
+//         List<Doctor> Doctors = doctorRep.findAllByCenter(center);
 //         if(Doctors.size() <1){
 //             throw new NoSuchElementException("No Doctors in this center!");
 //         }
@@ -35,7 +35,7 @@
 //     }
 
 //     public List<Doctor> ListDoctorByCenter(String centerName){
-//         List<Doctor> Doctors = doctorRep.findByCenter(centerName);
+//         List<Doctor> Doctors = doctorRep.findAllByCenter(centerName);
 //         if(Doctors.size() <1){
 //             throw new NoSuchElementException("No Doctors in this center!");
 //         }
@@ -43,7 +43,7 @@
 //     }
 
 //     public List<Doctor> ListDoctorByFirstName(String firstName){
-//         List<Doctor> Doctors = doctorRep.findByFirstName(firstName);
+//         List<Doctor> Doctors = doctorRep.findAllByFirstName(firstName);
 //         if(Doctors.size() <1){
 //             throw new NoSuchElementException("No Doctor with this first name!");
 //         }
@@ -51,7 +51,7 @@
 //     }
 
 //     public List<Doctor> ListDoctorByLastName(String lastName){
-//         List<Doctor> Doctors = doctorRep.findByLastName(lastName);
+//         List<Doctor> Doctors = doctorRep.findAllByLastName(lastName);
 //         if(Doctors.size() <1){
 //             throw new NoSuchElementException("No Doctor with this last name!");
 //         }
