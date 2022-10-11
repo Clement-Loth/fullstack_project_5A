@@ -25,7 +25,7 @@ public class Center{
     private String name;
     private String state;
 
-
+/*
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Doctor.class, mappedBy="center")
     private List<Doctor> DoctorList;
 
@@ -34,7 +34,7 @@ public class Center{
 
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
     private List<Appointment> AppointmentList;
-
+*/
     public Center(){
         
     }
@@ -66,7 +66,7 @@ public class Center{
     public void setState (String state){
         this.state = state;
     }
-
+/*
     public List<Doctor> getDoctorList() {
         return DoctorList;
     }
@@ -90,7 +90,7 @@ public class Center{
     public void setAppointmentList(List<Appointment> appointmentList) {
         AppointmentList = appointmentList;
     }
-    
+    */
 }
 
 

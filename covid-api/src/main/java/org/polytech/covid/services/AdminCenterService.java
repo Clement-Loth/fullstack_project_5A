@@ -22,13 +22,13 @@ public class AdminCenterService {
         return centerRep.findById(id).get();
     }
 
-    public List<Center> ListCenterByCity(String city){
-        List<Center> centers =  centerRep.findByCity(city);
-        if(centers.size() <1){
-            throw new NoSuchElementException("No center in this city!");
-        }
-        return centers;
-    }
+    // public List<Center> ListCenterByCity(String city){
+    //     List<Center> centers =  centerRep.findByCity(city);
+    //     if(centers.size() <1){
+    //         throw new NoSuchElementException("No center in this city!");
+    //     }
+    //     return centers;
+    // }
 
     public List<Center> ListCenterByName(String name){
         return centerRep.findByName(name);
