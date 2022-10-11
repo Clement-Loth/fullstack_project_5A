@@ -30,7 +30,7 @@ public class PublicCenterService {
     // }
 
     public List<Center> GetCenterByName(String name){
-        return centerRep.findByName(name);
+        return centerRep.findAllByName(name);
     }
 
 

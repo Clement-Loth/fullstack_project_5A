@@ -31,7 +31,7 @@ public class AdminCenterService {
     // }
 
     public List<Center> ListCenterByName(String name){
-        return centerRep.findByName(name);
+        return centerRep.findAllByName(name);
     }
 
     public void saveCenter(String name, String location){

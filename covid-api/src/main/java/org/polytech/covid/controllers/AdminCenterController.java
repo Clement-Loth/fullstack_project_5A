@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
@@ -24,5 +25,15 @@ public class AdminCenterController {
     @GetMapping("")
     public List<Center> list(){
         return centerRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Center> getById(@PathVariable long id){
+        return centerRepository.findById(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public List<Center> listByName(@PathVariable String name){
+        return centerRepository.findAllByName(name);
     }
 }
