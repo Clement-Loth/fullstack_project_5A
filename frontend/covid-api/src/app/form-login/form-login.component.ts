@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-login',
@@ -13,7 +14,8 @@ export class FormLoginComponent implements OnInit {
   returnUrl!: string;
   error = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -22,9 +24,16 @@ export class FormLoginComponent implements OnInit {
   });
   }
 
-  get f() { return this.loginForm.controls; }
-  
+  get username() { return this.loginForm.get('username'); }
+  get password() { return this.loginForm.get('password'); }
+
   onSubmit(){
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+  }
+    this.router.navigate(['centers']);
 
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Center } from '../center';
+import { Center } from '../models/center';
 
 @Component({
   selector: 'app-center',
