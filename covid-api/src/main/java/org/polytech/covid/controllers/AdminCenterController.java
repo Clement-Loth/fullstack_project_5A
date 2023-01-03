@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
@@ -20,20 +19,38 @@ import org.polytech.covid.services.AdminCenterService;
 @RequestMapping("/admin/center")
 public class AdminCenterController {
     @Autowired
-    CenterRepository centerRepository;
+    private CenterRepository centerRep;
 
     @GetMapping("")
     public List<Center> list(){
-        return centerRepository.findAll();
+        return centerRep.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Center> getById(@PathVariable long id){
-        return centerRepository.findById(id);
+    public ResponseEntity<Center> getByid(@PathVariable long id){
+        try{
+            Center center = centerRep.findById(id).orElseThrow();
+            return new ResponseEntity<Center>(center, HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<Center>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("city/{city}")
+    public ResponseEntity<List<Center>> getByCity(@PathVariable String city){
+        List<Center> centerList = centerRep.findAllByCity(city);
+        if(centerList.size() <1){
+            return new ResponseEntity<List<Center>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Center>>(centerList, HttpStatus.OK);
     }
 
     @GetMapping("/name/{name}")
-    public List<Center> listByName(@PathVariable String name){
-        return centerRepository.findAllByName(name);
+    public ResponseEntity<List<Center>> getByName(@PathVariable String name){
+        List<Center> centerList = centerRep.findAllByName(name);
+        if(centerList.size() <1){
+            return new ResponseEntity<List<Center>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Center>>(centerList, HttpStatus.OK);
     }
 }

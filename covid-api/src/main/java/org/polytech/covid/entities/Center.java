@@ -2,7 +2,6 @@ package org.polytech.covid.entities;
 
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-
+@Table(name="CENTERS")
 public class Center{
 
     @Id
@@ -24,17 +24,18 @@ public class Center{
     private String location;
     private String name;
     private String state;
+    private String city;
 
-/*
-    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Doctor.class, mappedBy="center")
-    private List<Doctor> DoctorList;
+
+    @OneToMany(cascade={CascadeType.ALL}, targetEntity=Doctor.class, mappedBy="center")
+    private List<Doctor> doctorList;
 
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Admin.class, mappedBy="center")
-    private List<Admin> AdminList;
+    private List<Admin> adminList;
 
     @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
-    private List<Appointment> AppointmentList;
-*/
+    private List<Appointment> appointmentList;
+
     public Center(){
         
     }
@@ -66,31 +67,30 @@ public class Center{
     public void setState (String state){
         this.state = state;
     }
-/*
+
+    public String getCity (){
+        return this.city;
+    }
+
+    public void setCity (String city){
+        this.city = city;
+    }
+
+    @JsonIgnore
     public List<Doctor> getDoctorList() {
-        return DoctorList;
+        return this.doctorList;
     }
 
-    public void setDoctorList(List<Doctor> doctorList) {
-        DoctorList = doctorList;
-    }
-
+    @JsonIgnore
     public List<Admin> getAdminList() {
-        return AdminList;
+        return this.adminList;
     }
 
-    public void setAdminList(List<Admin> adminList) {
-        AdminList = adminList;
-    }
-
+    @JsonIgnore
     public List<Appointment> getAppointmentList() {
-        return AppointmentList;
+        return this.appointmentList;
     }
-
-    public void setAppointmentList(List<Appointment> appointmentList) {
-        AppointmentList = appointmentList;
-    }
-    */
+    
 }
 
 
