@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,8 +22,6 @@ public class Doctor{
     private String firstName;
     private String lastName;
 
-	
-	//@ManyToOne(fetch = FetchType.LAZY, foreignKey)
     @ManyToOne
     @JoinColumn(name="center_id", nullable=false)
 	private Center center;
@@ -56,7 +53,7 @@ public class Doctor{
     public Center getCenter() {
         return center;
     }
-
+    
     public void setCenter(Center center) {
         this.center = center;
     }

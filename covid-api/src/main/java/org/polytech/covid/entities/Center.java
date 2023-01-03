@@ -2,26 +2,19 @@ package org.polytech.covid.entities;
 
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Persistence;
 import javax.persistence.Table;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="CENTERS")
 public class Center{
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,15 +27,14 @@ public class Center{
     private String city;
 
 
-    //@OneToMany(cascade={CascadeType.ALL}, targetEntity=Doctor.class, mappedBy="center")
-    //@OneToMany(cascade={CascadeType.ALL}, orphanRemoval = true, mappedBy="center")
-    //private List<Doctor> DoctorList;
+    @OneToMany(cascade={CascadeType.ALL}, targetEntity=Doctor.class, mappedBy="center")
+    private List<Doctor> doctorList;
 
-    // @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Admin.class, mappedBy="center")
-    // private List<Admin> AdminList;
+    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Admin.class, mappedBy="center")
+    private List<Admin> adminList;
 
-    // @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
-    // private List<Appointment> AppointmentList;
+    @OneToMany(cascade={CascadeType.REMOVE}, targetEntity=Appointment.class, mappedBy="center")
+    private List<Appointment> appointmentList;
 
     public Center(){
         
@@ -84,33 +76,20 @@ public class Center{
         this.city = city;
     }
 
-    // public List<Doctor> getDoctorList() {
-    //     entityManager = Persistence.createEntityManagerFactory(null).createEntityManager();
-    //     return entityManager
-    //          .createQuery("select d from doctors d where d.center_id = :center_id", Doctor.class)
-    //          .setParameter("center_id", center_id)
-    //          .getResultList();
-    // }
+    @JsonIgnore
+    public List<Doctor> getDoctorList() {
+        return this.doctorList;
+    }
 
-    // public void setDoctorList(List<Doctor> doctorList) {
-    //     DoctorList = doctorList;
-    // }
+    @JsonIgnore
+    public List<Admin> getAdminList() {
+        return this.adminList;
+    }
 
-    // public List<Admin> getAdminList() {
-    //     return AdminList;
-    // }
-
-    // public void setAdminList(List<Admin> adminList) {
-    //     AdminList = adminList;
-    // }
-
-    // public List<Appointment> getAppointmentList() {
-    //     return AppointmentList;
-    // }
-
-    // public void setAppointmentList(List<Appointment> appointmentList) {
-    //     AppointmentList = appointmentList;
-    // }
+    @JsonIgnore
+    public List<Appointment> getAppointmentList() {
+        return this.appointmentList;
+    }
     
 }
 
