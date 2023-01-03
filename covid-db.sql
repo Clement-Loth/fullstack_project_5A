@@ -20,7 +20,7 @@ CREATE TABLE USERS(
 	user_id bigserial PRIMARY KEY,
 	firstName varchar(30) not NULL,
 	lastName varchar(30)not NULL,
-	email varchar(50),
+	email varchar(50) not NULL UNIQUE,
 	phone varchar(20)
 );
 INSERT INTO USERS (firstName, lastName, email, phone)
