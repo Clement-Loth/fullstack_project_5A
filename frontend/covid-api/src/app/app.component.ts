@@ -15,4 +15,11 @@ export class AppComponent {
     if(routepath == "/centers") return true;
     else return false;
   }
+
+  getRoute(){
+    const routepath = window.location.pathname;
+    return routepath;
+  }
+
+
 }
