@@ -11,6 +11,8 @@ NO BACKUP OF MARKDOWN FILE
 
 Les TouxDoux :
 + Faire une page de Logout (? à voir si c'est mieux ainsi ?)
++ Modifier la page des centres, la page de réservation
++ Créer des pages réservées aux docteurs et administrateurs des centres
 + Modifier la navbar pour Login et Logout 
     - objectif : Désactiver Login quand on est loggé et désactiver Logout quand on est pas loggé
 + Guard et Interceptors
