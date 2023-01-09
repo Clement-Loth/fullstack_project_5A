@@ -1,6 +1,8 @@
-<div style="display: center; border: 1mm solid lightblue;">
-    Our brand new Vaccination Center is : <b>{{center.name}}</b><br/>
-    Full address : <b>{{center.address}}, {{center.postalCode}} {{center.city}}</b><br/>
-    <button (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
-    <h4 id="kewl"></h4>
+<div *ngFor="let center of centers">
+    <div style="display: center; border: 1mm solid lightblue;">
+        Our brand new Vaccination Center is : <b>{{center.name}}</b><br/>
+        Full address : <b>{{center.address}}, {{center.postalCode}} {{center.city}}</b><br/>
+        <button (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
+        <h4 id="kewl"></h4>
+    </div>
 </div>
