@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   
 })
 export class AppComponent {
-  title = 'THE covid api, you mad lad';
+  title = 'THE covid web app, you mad lad';
 
 
   getRoutePath(){
