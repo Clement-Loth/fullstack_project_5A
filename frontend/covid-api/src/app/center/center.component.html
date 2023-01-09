@@ -1,6 +1,6 @@
 <div class="card border-secondary" *ngFor="let center of centers">
     <div class="card-header bg-primary">Our brand new Vaccination Center is : {{center.name}}</div>
-    <div class="card-body">
+    <div class="card-body bg-light">
         <div class="card-text">Full address : {{center.address}}, {{center.postalCode}} {{center.city}}</div>
         <button class="btn btn-primary" (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
         <h4 id="kewl"></h4>
