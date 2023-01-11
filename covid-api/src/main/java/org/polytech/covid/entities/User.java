@@ -2,16 +2,21 @@ package org.polytech.covid.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="USERS")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -20,6 +25,14 @@ public class User {
     private String lastName;
     private String phone;
     private String password;
+    private boolean disabled;
+    
+    @ManyToOne	
+    @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
+	private Center center;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
     }
@@ -70,5 +83,29 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Center getCenter (){
+        return center;
+    }
+
+    public void setCenter (Center center){
+        this.center = center;
+    }
+
+    public boolean getDisabled (){
+        return disabled;
+    }
+
+    public void setDisabled (boolean disabled){
+        this.disabled = disabled;
     }
 }

@@ -11,7 +11,7 @@ import org.polytech.covid.entities.Appointment;
 import org.polytech.covid.repositories.AppointmentRepository;
 
 @Service
-public class AdminAppointmentService {
+public class AppointmentService {
     @Autowired
     private AppointmentRepository appRep;
 
@@ -45,10 +45,5 @@ public class AdminAppointmentService {
             throw new NoSuchElementException("No appointments at that date!");
         }
         return apps;
-    }
-
-    public void updateAppointmentValidated (Appointment app, boolean validated){
-        app.setValidated(validated);
-        appRep.save(app);
     }
 }

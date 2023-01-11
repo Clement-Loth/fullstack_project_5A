@@ -11,33 +11,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Appointements")
+@Table(name="Appointments")
 
 public class Appointment{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(nullable=false)
-    private Long appointment_id;
+    private Long id;
 
     private String firstName;
     private String lastName;
     private java.util.Date date;
     private String phone;
     private String email;
-    private boolean validated;
+    private boolean disabled;
+    private String state;
 
 
 	@ManyToOne	
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
+    // @ManyToOne:
+    // @JoinColumn(foreignKey=@ForeignKey(name="doctor_id"))
+	// private User doctor;
+
     public Appointment (){
         
     }
 
-    public Long getAppointment_id() {
-        return appointment_id;
+    public Long getId() {
+        return id;
     }
 
 
@@ -90,16 +95,13 @@ public class Appointment{
         this.email = email;
     }
 
-
-    public boolean isValidated() {
-        return validated;
+    public String getState(){
+        return this.state;
     }
 
-
-    public void setValidated(boolean validated) {
-        this.validated = validated;
+    public void setState(String state){
+        this.state = state;
     }
-
 
     public Center getCenter() {
         return center;
@@ -108,6 +110,24 @@ public class Appointment{
 
     public void setCenter(Center center) {
         this.center = center;
+    }
+
+
+    // public User getUser() {
+    //     return doctor;
+    // }
+
+
+    // public void setUser(User user) {
+    //     this.doctor = user;
+    // }
+
+    public boolean getDisabled (){
+        return disabled;
+    }
+
+    public void setDisabled (boolean disabled){
+        this.disabled = disabled;
     }
     
 }
