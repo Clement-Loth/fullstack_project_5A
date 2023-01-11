@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
     public List<User> getDoctorsByCenter(Center center){
         return this.userRepository.findDistinctByRoleAndCenter_Id(
                 Role.Doctor,
-                center.getCenter_id()
+                center.getId()
         );
     }
 

@@ -46,9 +46,4 @@ public class AdminAppointmentService {
         }
         return apps;
     }
-
-    public void updateAppointmentValidated (Appointment app, boolean validated){
-        app.setValidated(validated);
-        appRep.save(app);
-    }
 }
