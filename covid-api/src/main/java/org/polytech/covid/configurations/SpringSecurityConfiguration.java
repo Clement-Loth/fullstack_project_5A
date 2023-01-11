@@ -23,8 +23,8 @@ public class SpringSecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-                .antMatchers("/public/*").permitAll()
-				.antMatchers("/admin/*").authenticated()
+                .antMatchers("/public/**").permitAll()
+				.antMatchers("/admin/**").hasRole("SuperAdministrator")
                 .anyRequest().denyAll()
                 // .anyRequest().permitAll()
 			)

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
 
