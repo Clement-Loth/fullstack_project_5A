@@ -1,16 +1,42 @@
-<div>
-    <label for="firstname">First Name</label>
-    <input type="text" name="firstname"/><br/>
-    <label for="lastname">Last Name</label>
-    <input type="text" name="lastname"><br>
-    <label for="phonenumber">Phone Number</label>
-    <input type="text" name="phonenumber"><br>
-    <label for="email">Email</label>
-    <input type="text" name="email"><br>
-    <label for="date">Date of Appointment</label>
-    <input type="date" name="date"><br>
-    <h4>You are making an appointment for the center :</h4>
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <div class="jumbotron bg-light border border-primary rounded p-3">
+            <h3 class="d-flex justify-content-center text-success">Make an appointment</h3>
+            <form [formGroup]="appointForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="fullname" class="text-secondary" >Full Name</label>
+                    <input type="text" formControlName="fullname" class="form-control" [ngClass]="{'is-invalid' : submitted && fullname?.errors?.['required']}">
+                    <div *ngIf="submitted && fullname?.errors?.['required']" class="text-danger">
+                        Your fullname is required !
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="text-secondary">Lastname</label>
+                    <input type="text" formControlName="lastname" class="form-control" [ngClass]="{'is-invalid' : submitted && lastname?.errors?.['required']}">
+                    <div *ngIf="submitted && lastname?.errors?.['required']" class="text-danger">
+                        Your lastname is required !
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="appointDate" class="text-secondary">Date of your Appointment</label>
+                    <input type="date" formControlName="appointDate" class="form-control" [ngClass]="{'is-invalid' : submitted && appointDate?.errors?.['required']}">
+                    <div *ngIf="submitted && appointDate?.errors?.['required']" class="text-danger">
+                        Please select a valid date for your appointment !
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mail" class="text-secondary">E-mail address</label>
+                    <input type="email" formControlName="mail" class="form-control" [ngClass]="{'is-invalid' : submitted && mail?.errors}" [email]="true">
+                    <div *ngIf="submitted && mail?.errors" class="text-danger">
+                        Please type a valid email address !
+                    </div>
+                </div>
 
 
-    <button (click)="makeAppointment()">Appoint !</button>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <div class="form-group"><button [disabled]="loading" class="btn btn-success mt-3">Validate your appointment</button></div>
+            </form>
+                <div><button class="btn btn-danger mt-3" (click)="onCancel()">Cancel</button></div>
+        </div>
+    </div>
 </div>
