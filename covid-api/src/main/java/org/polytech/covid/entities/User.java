@@ -6,7 +6,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +23,13 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
-    private String phone;   private String password;
+    private String phone;
+    private String password;
+    
+    @ManyToOne	
+    @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
+	private Center center;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
