@@ -1,6 +1,10 @@
-<div style="display: center; border: 1mm solid lightblue;">
-    Our brand new Vaccination Center is : <b>{{center.name}}</b><br/>
-    Full address : <b>{{center.address}}, {{center.postalCode}} {{center.city}}</b><br/>
-    <button (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
-    <h4 id="kewl"></h4>
+<div *ngFor="let center of centers">
+    <div class="card m-1">
+        <div class="card-header bg-primary">Our brand new Vaccination Center is : {{center.name}}</div>
+        <div class="card-body bg-light">
+            <div class="card-text">Full address : {{center.address}}, {{center.postalCode}} {{center.city}}</div>
+            <button class="btn btn-primary" (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
+            <h4 id="kewl"></h4>
+        </div>
+    </div>
 </div>

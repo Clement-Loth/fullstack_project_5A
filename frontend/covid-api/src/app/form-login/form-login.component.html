@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6 offset-sm-3">
-        <div class="jumbotron bg-light border border-primary border-3">
-            <h1 class="text-primary offset-5">Login</h1>
+        <div class="jumbotron bg-light border border-primary rounded p-3">
+            <h1 class="d-flex justify-content-center text-primary">Login</h1>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username" class="text-secondary" >Username</label>
@@ -17,8 +17,9 @@
                         Password is required !
                     </div>
                 </div>
-                <div class="form-group"><button [disabled]="loading" class="btn btn-primary">Login</button></div>
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <div class="form-group"><button [disabled]="loading" class="btn btn-primary mt-3">Login</button></div>
+                <div class="form-group" Todo="wat"><a href="/signin">Register a doctor</a></div>
             </form>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { CenterComponent } from './center/center.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormLoginComponent } from './form-login/form-login.component';
+import { FormSigninComponent } from './form-signin/form-signin.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormLoginComponent } from './form-login/form-login.component';
     CenterComponent,
     AppointmentComponent,
     FormLoginComponent,
+    FormSigninComponent,
   ],
   imports: [
     BrowserModule,

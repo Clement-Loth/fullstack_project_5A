@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   
 })
 export class AppComponent {
-  title = 'THE covid api, you mad lad';
+  title = 'THE covid web app, you mad lad';
 
 
   getRoutePath(){
@@ -15,4 +15,11 @@ export class AppComponent {
     if(routepath == "/centers") return true;
     else return false;
   }
+
+  getRoute(){
+    const routepath = window.location.pathname;
+    return routepath;
+  }
+
+
 }

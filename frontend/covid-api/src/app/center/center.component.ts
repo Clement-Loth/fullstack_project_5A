@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Center } from '../models/center';
+import { CenterService } from '../services/center.service';
 
 @Component({
   selector: 'app-center',
@@ -8,17 +9,12 @@ import { Center } from '../models/center';
 })
 export class CenterComponent implements OnInit {
 
-  constructor() { }
-
-  center : Center = {
-    id : 45,
-    name: "Salle des fêtes Bernie BONVOISIN",
-    address: "All. de Champagne",
-    postalCode: 54500,
-    city: "Vandoeuvre-lès-Nancy"
-  }
+  constructor(private centerservice : CenterService) { }
+  centers! : Center[];
+ 
 
   ngOnInit(): void {
+    this.centers = this.centerservice.getAllVaxxCenters();
   }
 
   clickEvent(){
