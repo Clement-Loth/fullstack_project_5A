@@ -25,6 +25,7 @@ public class User {
     private String lastName;
     private String phone;
     private String password;
+    private boolean disabled;
     
     @ManyToOne	
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
@@ -90,5 +91,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Center getCenter (){
+        return center;
+    }
+
+    public void setCenter (Center center){
+        this.center = center;
+    }
+
+    public boolean getDisabled (){
+        return disabled;
+    }
+
+    public void setDisabled (boolean disabled){
+        this.disabled = disabled;
     }
 }
