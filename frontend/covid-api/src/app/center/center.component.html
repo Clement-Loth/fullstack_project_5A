@@ -2,9 +2,13 @@
     <div class="card m-1">
         <div class="card-header bg-primary">Our brand new Vaccination Center is : {{center.name}}</div>
         <div class="card-body bg-light">
-            <div class="card-text">Full address : {{center.address}}, {{center.postalCode}} {{center.city}}</div>
-            <button class="btn btn-primary" (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
-            <h4 id="kewl"></h4>
+            <div class="card-text">
+                Full address : {{center.location}}, {{center.city}}
+                <div [ngClass]=" center.state == 'Open' ? 'text-success' : 'text-danger' ">This center is {{center.state}}</div>
+            </div>
+            <div *ngIf="center.state == 'Open'">
+                <button class="btn btn-primary" (click)="clickEvent()" [routerLink]="['/appointment/',center.id]">Make an appointment</button>
+            </div>
         </div>
     </div>
 </div>
