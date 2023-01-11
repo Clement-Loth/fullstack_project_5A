@@ -31,14 +31,6 @@ public class User {
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
-    public Center getCenter() {
-        return center;
-    }
-
-    public void setCenter(Center center) {
-        this.center = center;
-    }
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
