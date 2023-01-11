@@ -10,7 +10,7 @@ import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
 
 @Service
-public class AdminCenterService {
+public class CenterService {
     @Autowired
     private CenterRepository centerRep;
 

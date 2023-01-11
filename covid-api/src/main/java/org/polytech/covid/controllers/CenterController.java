@@ -3,6 +3,7 @@ package org.polytech.covid.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,21 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import javax.annotation.security.RolesAllowed;
+
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
 
 @RestController
-@RequestMapping("/admin/center")
-public class AdminCenterController {
+public class CenterController {
     @Autowired
     private CenterRepository centerRep;
 
-    @GetMapping("")
+    @GetMapping("/public/center")
     public List<Center> list(){
         return centerRep.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/center/{id}")
     public ResponseEntity<Center> getByid(@PathVariable long id){
         try{
             Center center = centerRep.findById(id).orElseThrow();
@@ -38,7 +41,7 @@ public class AdminCenterController {
         }
     }
 
-    @GetMapping("/city/{city}")
+    @GetMapping("/public/center/city/{city}")
     public ResponseEntity<List<Center>> getByCity(@PathVariable String city){
         List<Center> centerList = centerRep.findAllByCity(city);
         if(centerList.size() <1){
@@ -47,7 +50,7 @@ public class AdminCenterController {
         return new ResponseEntity<List<Center>>(centerList, HttpStatus.OK);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/public/center/name/{name}")
     public ResponseEntity<List<Center>> getByName(@PathVariable String name){
         List<Center> centerList = centerRep.findAllByName(name);
         if(centerList.size() <1){
@@ -56,7 +59,8 @@ public class AdminCenterController {
         return new ResponseEntity<List<Center>>(centerList, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/admin/center")
+    @RolesAllowed("SuperAdministrator")
     public ResponseEntity<Center> newCenter(@RequestParam String centerName, String centerCity, String centerState, String centerLocation){
         Center newCenter = new Center();
         newCenter.setCity(centerCity);
@@ -67,7 +71,8 @@ public class AdminCenterController {
         return new ResponseEntity<Center>(newCenter,HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/center/{id}")
+    @RolesAllowed("SuperAdministrator")
     public ResponseEntity<Center> updateCenter(@RequestParam String centerName, String centerCity, String centerState, String centerLocation, @PathVariable long id){
         Center center = centerRep.findById(id).orElseThrow();
         center.setCity(centerCity);
@@ -78,7 +83,8 @@ public class AdminCenterController {
         return new ResponseEntity<Center>(center,HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/center/{id}")
+    @RolesAllowed("SuperAdministrator")
     public ResponseEntity<Center> deleteCenter(@PathVariable long id){
         Center center = centerRep.findById(id).orElseThrow();
         center.setDisabled(true);

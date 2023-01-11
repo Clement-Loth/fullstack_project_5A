@@ -1,8 +1,12 @@
 package org.polytech.covid.configurations;
 
+import java.lang.reflect.Method;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SpringSecurityConfiguration {
 
     @Bean
@@ -23,10 +28,9 @@ public class SpringSecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-                .antMatchers("/public/**").permitAll()
-				.antMatchers("/admin/**").hasRole("SuperAdministrator")
+                .antMatchers(HttpMethod.GET, "/public/**").permitAll()
+				.antMatchers("/admin/**").authenticated()
                 .anyRequest().denyAll()
-                // .anyRequest().permitAll()
 			)
 			.httpBasic(Customizer.withDefaults())
 			.cors().disable()

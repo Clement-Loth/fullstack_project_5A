@@ -11,7 +11,7 @@ import org.polytech.covid.entities.Appointment;
 import org.polytech.covid.repositories.AppointmentRepository;
 
 @Service
-public class AdminAppointmentService {
+public class AppointmentService {
     @Autowired
     private AppointmentRepository appRep;
 
