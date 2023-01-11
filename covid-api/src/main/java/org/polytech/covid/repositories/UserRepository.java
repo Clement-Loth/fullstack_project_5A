@@ -3,8 +3,8 @@ package org.polytech.covid.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import org.polytech.covid.entities.Role;
 import org.polytech.covid.entities.User;
+import org.polytech.covid.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

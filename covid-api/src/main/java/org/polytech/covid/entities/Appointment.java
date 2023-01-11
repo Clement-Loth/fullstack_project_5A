@@ -33,9 +33,9 @@ public class Appointment{
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
-    // @ManyToOne	
-    // @JoinColumn(foreignKey=@ForeignKey(name="user_id"))
-	// private Long doctor;
+    // @ManyToOne:
+    // @JoinColumn(foreignKey=@ForeignKey(name="doctor_id"))
+	// private User doctor;
 
     public Appointment (){
         

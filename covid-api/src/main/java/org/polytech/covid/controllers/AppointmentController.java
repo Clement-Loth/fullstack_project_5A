@@ -40,9 +40,9 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping("center/{center}")
-    public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Center center){
-        List<Appointment> appList = appRep.findAllByCenter(center);
+    @GetMapping("/center/{center_id}")
+    public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long center_id){
+        List<Appointment> appList = appRep.findAllByCenter_id(center_id);
         if(appList.size() <1){
             return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }
@@ -50,7 +50,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Appointment> newapp (@RequestParam String firstName, String lastName, Center center){
+    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Center center){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
         newApp.setLastName(lastName);
@@ -60,7 +60,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Appointment> updateapp(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
+    public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
         Appointment app = appRep.findById(id).orElseThrow();
         app.setFirstName(firstName);
         app.setLastName(lastName);
@@ -70,7 +70,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Appointment> deleteapp(@PathVariable long id){
+    public ResponseEntity<Appointment> deleteApp(@PathVariable long id){
         Appointment app = appRep.findById(id).orElseThrow();
         app.setDisabled(true);
         appRep.save(app);

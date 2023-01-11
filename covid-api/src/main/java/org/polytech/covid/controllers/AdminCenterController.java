@@ -39,7 +39,7 @@ public class AdminCenterController {
         }
     }
 
-    @GetMapping("city/{city}")
+    @GetMapping("/city/{city}")
     public ResponseEntity<List<Center>> getByCity(@PathVariable String city){
         List<Center> centerList = centerRep.findAllByCity(city);
         if(centerList.size() <1){
