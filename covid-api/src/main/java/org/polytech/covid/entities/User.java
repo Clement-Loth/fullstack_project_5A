@@ -32,6 +32,7 @@ public class User {
 	private Center center;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "genre_enum_type")
     private Role role;
 
     public User() {
