@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name="USERS")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -29,6 +29,14 @@ public class User {
     @ManyToOne	
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
+
+    public Center getCenter() {
+        return center;
+    }
+
+    public void setCenter(Center center) {
+        this.center = center;
+    }
 
     @Enumerated(EnumType.STRING)
     private Role role;
