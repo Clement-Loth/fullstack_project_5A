@@ -21,9 +21,10 @@ public class SpringSecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-                .antMatchers("/public/*").permitAll()
-				.antMatchers("/admin/*").authenticated()
-                .anyRequest().denyAll()
+                // .antMatchers("/public/*").permitAll()
+				// .antMatchers("/admin/*").authenticated()
+                // .anyRequest().denyAll()
+                .anyRequest().permitAll()
 			);
 
 		return http.build();

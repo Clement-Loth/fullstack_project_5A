@@ -18,15 +18,6 @@ public class AdminCenterService {
         return centerRep.findAll();
     }
 
-    // public Center getCenter (long id){
-    //     Center c = centerRep.findById(id).get();
-    //     List<Doctor> = entityManager
-    //     .createQuery("select d from doctors d where d.center_id = :center_id", Doctor.class)
-    //     .setParameter("center_id", center_id)
-    //     .getResultList();
-    //     return c;
-    // }
-
     public List<Center> ListCenterByCity(String city){
         List<Center> centers =  centerRep.findAllByCity(city);
         if(centers.size() <1){
