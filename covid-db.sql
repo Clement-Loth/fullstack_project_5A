@@ -23,17 +23,20 @@ CREATE TABLE USERS(
 	id bigserial PRIMARY KEY,
 	first_name varchar(30) not NULL,
 	last_name varchar(30)not NULL,
+	password varchar(72) not NULL,
 	email varchar(50) not NULL UNIQUE,
 	phone varchar(20),
 	disabled boolean not NULL,
-	role ROLES not NULL
+	role ROLES not NULL,
+	center_id bigint,
+	FOREIGN KEY(center_id) REFERENCES CENTERS(id)	
 );
-INSERT INTO USERS (first_name, last_name, email, phone, disabled, role)
-VALUES ('Carl', 'JUAN', 'aaa@bbb.fr', '01 01 01 01 01',false, 'Administrator'); 
-INSERT INTO USERS (first_name, last_name, email, phone, disabled, role)
-VALUES ('Stéphanie', 'MONAK', 'bbb@ccc.com', '23 23 23 23 23',false, 'Doctor');
-INSERT INTO USERS (first_name, last_name, email, phone, disabled, role)
-VALUES ('Goefrey', 'SERNOUS', 'ccc@ddd.com', '34 34 34 34 34',false, 'SuperAdministrator');
+INSERT INTO USERS (first_name, last_name, password, email, phone, disabled, role, center_id)
+VALUES ('Carl', 'JUAN', '','aaa@bbb.fr', '01 01 01 01 01',false, 'Administrator', 1); 
+INSERT INTO USERS (first_name, last_name, password, email, phone, disabled, role, center_id)
+VALUES ('Stéphanie', 'MONAK', '', 'bbb@ccc.com', '23 23 23 23 23',false, 'Doctor', 2);
+INSERT INTO USERS (first_name, last_name, password, email, phone, disabled, role)
+VALUES ('Goefrey', 'SERNOUS', '', 'ccc@ddd.com', '34 34 34 34 34',false, 'SuperAdministrator');
 
 DROP TYPE IF EXISTS STATE_CLIENT CASCADE;
 CREATE TYPE STATE_CLIENT as ENUM('Treated','Waiting','Cancelled');
