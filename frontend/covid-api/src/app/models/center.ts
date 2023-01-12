@@ -1,6 +1,6 @@
 export interface Center {
     id: number;
-    location: string
+    location: string;
     name: string;
     state: string;
     city: string;

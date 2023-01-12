@@ -13,7 +13,8 @@ export class CenterService {
     {id: 23, name:"Centre de Réadaptation Lay St Christophe", location:"4 Rue du Professeur Montaut", state:"Closed", city: "Lay-Saint-Christophe", disabled:false}
 
   ];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  }
 
   getAllVaxxCenters() : Center[] {
     return this.CENTERS;

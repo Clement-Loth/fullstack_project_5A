@@ -11,13 +11,13 @@ import { CenterService } from '../services/center.service';
 export class CenterComponent implements OnInit {
 
   constructor(private centerservice : CenterService) { }
-  centers! : Center[];
+  centers? : Center[];
  
 
   ngOnInit(): void {
     //this.centers = this.centerservice.getAllVaxxCenters();
 
-    this.centerservice.getAll().pipe(first()).subscribe(centers =>{
+    this.centerservice.getAll().pipe(first()).subscribe((centers : Center[]) =>{
         this.centers = centers;
     });
 
