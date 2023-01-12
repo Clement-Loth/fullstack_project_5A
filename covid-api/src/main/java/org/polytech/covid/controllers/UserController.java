@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.polytech.covid.entities.User;
 import org.polytech.covid.entities.Role;
 import org.polytech.covid.repositories.UserRepository;
@@ -22,6 +24,7 @@ import org.polytech.covid.entities.Center;
 
 @RestController
 @RequestMapping("/admin/user")
+@RolesAllowed("SuperAdministrator")
 public class UserController {
     @Autowired
     private UserRepository userRep;

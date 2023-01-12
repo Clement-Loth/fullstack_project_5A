@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Center } from '../models/center' ;
 
 @Injectable({
@@ -7,14 +9,18 @@ import { Center } from '../models/center' ;
 export class CenterService {
 
   CENTERS : Center[]  = [ 
-    {id: 45, name:"Salle des fêtes Bernie BONVOISIN", address:"All. de Champagne", postalCode: 54500, city: "Vandoeuvre-lès-Nancy" },
-    {id: 23, name:"Centre de Réadaptation Lay St Christophe", address:"4 Rue du Professeur Montaut", postalCode: 54690, city: "Lay-Saint-Christophe"}
+    {id: 45, name:"Salle des fêtes Bernie BONVOISIN", location:"All. de Champagne", state: "Open", city: "Vandoeuvre-lès-Nancy",disabled:false },
+    {id: 23, name:"Centre de Réadaptation Lay St Christophe", location:"4 Rue du Professeur Montaut", state:"Closed", city: "Lay-Saint-Christophe", disabled:false}
 
   ];
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getAllVaxxCenters() : Center[] {
     return this.CENTERS;
+  }
+
+  getAll(){
+    return this.http.get<Center[]>(`${environment.apiPath}/public/center`) ;
   }
 
   // ICI requête HTTP vers le back pour récupérer les centres !

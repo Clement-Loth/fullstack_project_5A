@@ -1,7 +1,5 @@
 package org.polytech.covid.configurations;
 
-import java.lang.reflect.Method;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

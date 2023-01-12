@@ -1,7 +1,8 @@
 export interface Center {
     id: number;
+    location: string
     name: string;
-    address: string;
-    postalCode: number;
+    state: string;
     city: string;
+    disabled: boolean;
 }
