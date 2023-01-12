@@ -24,7 +24,7 @@ public class AppointmentService {
     }
     
     public List<Appointment> ListAppointmentByFirstName(String firstName){
-        List<Appointment> apps = appRep.findAllByFirstName(firstName);
+        List<Appointment> apps = appRep.findAllByFirstNameAndDisabledFalse(firstName);
         if(apps.size() <1){
             throw new NoSuchElementException("No clients with that first name!");
         }
@@ -32,7 +32,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> ListAppointmentByLastName (String lastName){
-        List<Appointment> apps = appRep.findAllByLastName(lastName);
+        List<Appointment> apps = appRep.findAllByLastNameAndDisabledFalse(lastName);
         if(apps.size() <1){
             throw new NoSuchElementException("No clients with that last name!");
         }
@@ -40,7 +40,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> ListAppointmentByDate (Date date){
-        List<Appointment> apps = appRep.findAllByDate(date);
+        List<Appointment> apps = appRep.findAllByDateAndDisabledFalse(date);
         if(apps.size() <1){
             throw new NoSuchElementException("No appointments at that date!");
         }

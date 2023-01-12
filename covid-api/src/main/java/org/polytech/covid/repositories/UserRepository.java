@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
-    List<User> findAllByFirstName(String firstName);
-    List<User> findAllByLastName(String lastName);
-    List<User> findByRole(Role role);
-    List<User> findDistinctByRoleAndCenter_Id(Role role, Long center_id);
+    Optional<User> findByEmailAndDisabledFalse(String email);
+    List<User> findAllByFirstNameAndDisabledFalse(String firstName);
+    List<User> findAllByLastNameAndDisabledFalse(String lastName);
+    List<User> findByRoleAndDisabledFalse(Role role);
+    List<User> findDistinctByRoleAndCenter_IdAndDisabledFalse(Role role, Long center_id);
 }

@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/role/{role}")
     public ResponseEntity<List<User>> getByRole(@PathVariable String role){
-        List<User> userList = userRep.findByRole(Role.valueOf(role));
+        List<User> userList = userRep.findByRoleAndDisabledFalse(Role.valueOf(role));
         if(userList.size() <1){
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("/center/{center_id}/{role}")
     public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long center_id ){
-        List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, center_id);
+        List<User> userList = userRep.findDistinctByRoleAndCenter_IdAndDisabledFalse(role, center_id);
         if(userList.size() <1){
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
