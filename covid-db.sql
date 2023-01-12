@@ -7,7 +7,7 @@ CREATE TABLE CENTERS(
 	location varchar(150) not NULL,
 	state STATE_CENTER not NULL,
 	city varchar(50) not NULL,
-	disabled boolean not NULL default false
+	disabled boolean
 );
 INSERT INTO CENTERS (name, location, state, city, disabled)
 VALUES ('Centre hospitalier de Moulins-Yzeure', '10, av. du Général de Gaulle', 'Open','Moulins-Yzeure',false);
@@ -26,7 +26,7 @@ CREATE TABLE USERS(
 	password varchar(72) not NULL,
 	email varchar(50) not NULL UNIQUE,
 	phone varchar(20),
-	disabled boolean not NULL default false,
+	disabled boolean,
 	role ROLES not NULL,
 	center_id bigint,
 	FOREIGN KEY(center_id) REFERENCES CENTERS(id)	
@@ -49,7 +49,7 @@ CREATE TABLE APPOINTMENTS (
 	email varchar(50) not NULL,
 	state STATE_CLIENT not NULL,
 	date timestamp not NULL,
-	disabled boolean not NULL default false,
+	disabled boolean,
 	center_id bigserial,
 	FOREIGN KEY(center_id) REFERENCES CENTERS(id),
 	doctor_id bigserial,
