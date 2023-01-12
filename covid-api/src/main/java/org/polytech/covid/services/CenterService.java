@@ -19,7 +19,7 @@ public class CenterService {
     }
 
     public List<Center> ListCenterByCity(String city){
-        List<Center> centers =  centerRep.findAllByCityAndDisabledFalse(city);
+        List<Center> centers =  centerRep.findAllByCity(city);
         if(centers.size() <1){
             throw new NoSuchElementException("No center in this city!");
         }
@@ -27,7 +27,7 @@ public class CenterService {
     }
 
     public List<Center> ListCenterByName(String name){
-        return centerRep.findAllByNameAndDisabledFalse(name);
+        return centerRep.findAllByName(name);
     }
 
     public void saveCenter(String name, String location){
