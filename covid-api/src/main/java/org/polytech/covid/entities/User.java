@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Where(clause = "disabled<>'true'")
 @Table(name="USERS")
@@ -49,6 +51,7 @@ public class User {
         this.id = id;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
