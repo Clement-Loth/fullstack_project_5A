@@ -32,11 +32,11 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAdministrators(){
-        return this.userRepository.findByRoleAndDisabledFalse(Role.Administrator);
+        return this.userRepository.findByRole(Role.Administrator);
     }
 
     public List<User> getDoctorsByCenter(Center center){
-        return this.userRepository.findDistinctByRoleAndCenter_IdAndDisabledFalse(
+        return this.userRepository.findDistinctByRoleAndCenter_Id(
                 Role.Doctor,
                 center.getId()
         );
@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     public void createSuperAdminDefault() {
-        if(userRepository.findByEmailAndDisabledFalse("test@toto.fr").isEmpty()){
+        if(userRepository.findByEmail("test@toto.fr").isEmpty()){
             User superAdmin = new User();
             superAdmin.setEmail("test@toto.fr");
             superAdmin.setFirstName("Test");
@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException{
 
-        Optional<User> user = this.userRepository.findByEmailAndDisabledFalse(username);
+        Optional<User> user = this.userRepository.findByEmail(username);
         if(user.isPresent()){
             return new MyUserDetails(user.get());
         } else {

@@ -42,7 +42,7 @@ public class AppointmentController {
 
     @GetMapping("/center/{center_id}")
     public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long center_id){
-        List<Appointment> appList = appRep.findAllByCenter_idAndDisabledFalse(center_id);
+        List<Appointment> appList = appRep.findAllByCenter_id(center_id);
         if(appList.size() <1){
             return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }

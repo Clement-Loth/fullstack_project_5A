@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause = "disabled<>'true'")
 @Table(name="Appointments")
 
 public class Appointment{
