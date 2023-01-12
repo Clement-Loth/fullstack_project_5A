@@ -23,14 +23,14 @@ public class PublicCenterService {
     }
 
     public List<Center> ListCenterByCity(String city){
-        List<Center> centers =  centerRep.findAllByCity(city);
+        List<Center> centers =  centerRep.findAllByCityAndDisabledFalse(city);
         if(centers.size() <1)
         throw new NoSuchElementException("No center in this city!");
         return centers;
     }
 
     public List<Center> GetCenterByName(String name){
-        return centerRep.findAllByName(name);
+        return centerRep.findAllByNameAndDisabledFalse(name);
     }
 
 

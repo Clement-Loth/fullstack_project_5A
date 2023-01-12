@@ -7,7 +7,7 @@ CREATE TABLE CENTERS(
 	location varchar(150) not NULL,
 	state STATE_CENTER not NULL,
 	city varchar(50) not NULL,
-	disabled boolean not NULL
+	disabled boolean not NULL default false
 );
 INSERT INTO CENTERS (name, location, state, city, disabled)
 VALUES ('Centre hospitalier de Moulins-Yzeure', '10, av. du Général de Gaulle', 'Open','Moulins-Yzeure',false);
@@ -26,7 +26,7 @@ CREATE TABLE USERS(
 	password varchar(72) not NULL,
 	email varchar(50) not NULL UNIQUE,
 	phone varchar(20),
-	disabled boolean not NULL,
+	disabled boolean not NULL default false,
 	role ROLES not NULL,
 	center_id bigint,
 	FOREIGN KEY(center_id) REFERENCES CENTERS(id)	
@@ -49,7 +49,7 @@ CREATE TABLE APPOINTMENTS (
 	email varchar(50) not NULL,
 	state STATE_CLIENT not NULL,
 	date timestamp not NULL,
-	disabled boolean not NULL,
+	disabled boolean not NULL default false,
 	center_id bigserial,
 	FOREIGN KEY(center_id) REFERENCES CENTERS(id),
 	doctor_id bigserial,
@@ -60,4 +60,4 @@ VALUES ('Axel', 'LOTH', '00 00 00 00 00', 'actual.email@gmail.com', 'Treated', '
 INSERT INTO APPOINTMENTS (first_name, last_name, phone, email, state, date, disabled, center_id, doctor_id)
 VALUES ('Gérard', 'BOUCHARD', '11 11 11 11 11', 'true-actual.email@gmail.com', 'Waiting', '2023-09-11 07:54:37',false, 3, 3);
 INSERT INTO APPOINTMENTS (first_name, last_name, phone, email, state, date, disabled, center_id, doctor_id)
-VALUES ('Antoine', 'DANIEL', '22 22 22 22 22', 'not-a-true-email@hotmail', 'Cancelled', '2019-08-12 17:07:22',false, 1, 1);
+VALUES ('Antoine', 'DANIEL', '22 22 22 22 22', 'not-a-true-email@hotmail', 'Cancelled', '2019-08-12 17:07:22', true, 1, 1);

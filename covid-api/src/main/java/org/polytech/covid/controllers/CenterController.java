@@ -41,7 +41,7 @@ public class CenterController {
 
     @GetMapping("/public/center/city/{city}")
     public ResponseEntity<List<Center>> getByCity(@PathVariable String city){
-        List<Center> centerList = centerRep.findAllByCity(city);
+        List<Center> centerList = centerRep.findAllByCityAndDisabledFalse(city);
         if(centerList.size() <1){
             return new ResponseEntity<List<Center>>(HttpStatus.NOT_FOUND);
         }
@@ -50,7 +50,7 @@ public class CenterController {
 
     @GetMapping("/public/center/name/{name}")
     public ResponseEntity<List<Center>> getByName(@PathVariable String name){
-        List<Center> centerList = centerRep.findAllByName(name);
+        List<Center> centerList = centerRep.findAllByNameAndDisabledFalse(name);
         if(centerList.size() <1){
             return new ResponseEntity<List<Center>>(HttpStatus.NOT_FOUND);
         }
