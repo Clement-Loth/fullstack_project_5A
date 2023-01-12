@@ -5,4 +5,5 @@ export interface User {
     phone: string;
     password: string;
     disabled: boolean;
+    authdata?: string;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-form-login',
@@ -15,7 +17,7 @@ export class FormLoginComponent implements OnInit {
   error = '';
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router, private authService : AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -33,8 +35,22 @@ export class FormLoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
   }
-    this.router.navigate(['centers']);
-
+  this.error = '';
+  this.loading = true;
+  this.authService.login(this.username!.value, this.password!.value)
+      .pipe(first())
+      .subscribe({
+          next: () => {
+              // get return url from route parameters or default to '/'
+              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+              this.router.navigate([returnUrl]);
+          },
+          error: error => {
+              this.error = error;
+              this.loading = false;
+          }
+      });
+      this.route.snapshot.queryParams['returnUrl']
   }
 
 }

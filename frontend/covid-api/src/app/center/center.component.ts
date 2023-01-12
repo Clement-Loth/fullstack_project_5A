@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs';
-import { Center } from '../models/center';
-import { CenterService } from '../services/center.service';
+import { Center } from '../_models/center';
+import { CenterService } from '../_services/center.service';
 
 @Component({
   selector: 'app-center',
