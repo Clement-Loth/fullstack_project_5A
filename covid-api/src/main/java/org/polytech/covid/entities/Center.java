@@ -7,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause = "disabled<>'true'")
 @Table(name="CENTERS")
 public class Center{
 
