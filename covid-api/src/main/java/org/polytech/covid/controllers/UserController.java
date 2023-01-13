@@ -27,7 +27,6 @@ import org.polytech.covid.entities.Center;
 
 @RestController
 @RequestMapping("/admin/user")
-@RolesAllowed("SuperAdministrator")
 public class UserController {
     @Autowired
     private UserRepository userRep;
@@ -48,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getbyEmail(@PathVariable String email){
+    public ResponseEntity<User> getByEmail(@PathVariable String email){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
         if(!user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !email.equals(user.get().getEmail())) 
@@ -65,6 +64,7 @@ public class UserController {
         return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
     }
 
+    @RolesAllowed("SuperAdministrator")
     @GetMapping("/center/{center_id}/{role}")
     public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long center_id ){
         List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, center_id);
@@ -74,6 +74,7 @@ public class UserController {
         return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
     }
 
+    @RolesAllowed("SuperAdministrator")
     @PostMapping("/")
     public ResponseEntity<User> newUser (@RequestParam String firstName, String lastName, String email, String phone, Center center){
         User newUser = new User();
@@ -84,6 +85,7 @@ public class UserController {
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
 
+    @RolesAllowed("SuperAdministrator")
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
         User user = userRep.findById(id).orElseThrow();
@@ -94,6 +96,7 @@ public class UserController {
         return new ResponseEntity<User>(user,HttpStatus.OK);
     }
 
+    @RolesAllowed("SuperAdministrator")
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable long id){
         User user = userRep.findById(id).orElseThrow();
