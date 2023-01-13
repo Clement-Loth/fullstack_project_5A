@@ -36,9 +36,9 @@ public class Appointment{
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
-    // @ManyToOne:
-    // @JoinColumn(foreignKey=@ForeignKey(name="doctor_id"))
-	// private User doctor;
+    @ManyToOne
+    @JoinColumn(foreignKey=@ForeignKey(name="doctor_id"))
+	private User doctor;
 
     public Appointment (){
         
@@ -116,14 +116,14 @@ public class Appointment{
     }
 
 
-    // public User getUser() {
-    //     return doctor;
-    // }
+    public User getUser() {
+        return doctor;
+    }
 
 
-    // public void setUser(User user) {
-    //     this.doctor = user;
-    // }
+    public void setUser(User user) {
+        this.doctor = user;
+    }
 
     public boolean getDisabled (){
         return disabled;
