@@ -48,11 +48,12 @@ public class UserController {
 
     @GetMapping("/email/{email}")
     public ResponseEntity<User> getByEmail(@PathVariable String email){
+        Optional <User> target = userRep.findByEmail(email);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
         if(!user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !email.equals(user.get().getEmail())) 
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+        return new ResponseEntity<User>(target.get(), HttpStatus.OK);
     }
 
     @GetMapping("/role/{role}")
@@ -85,23 +86,29 @@ public class UserController {
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
 
-    @RolesAllowed("SuperAdministrator")
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
-        User user = userRep.findById(id).orElseThrow();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setCenter(center);
-        userRep.save(user);
-        return new ResponseEntity<User>(user,HttpStatus.OK);
+        Optional <User> target = userRep.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRep.findByEmail(authentication.getName());
+        if(!target.isPresent() || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !(target.get().getCenter().equals(user.get().getCenter()) && user.get().getRole() == Role.Administrator)) 
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        target.get().setFirstName(firstName);
+        target.get().setLastName(lastName);
+        target.get().setCenter(center);
+        userRep.save(target.get());
+        return new ResponseEntity<User>(target.get(),HttpStatus.OK);
     }
 
-    @RolesAllowed("SuperAdministrator")
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable long id){
-        User user = userRep.findById(id).orElseThrow();
-        user.setDisabled(true);
-        userRep.save(user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        Optional <User> target = userRep.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRep.findByEmail(authentication.getName());
+        if(!target.isPresent() || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !(target.get().getCenter().equals(user.get().getCenter()) && user.get().getRole() == Role.Administrator)) 
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        target.get().setDisabled(true);
+        userRep.save(target.get());
+        return new ResponseEntity<User>(target.get(), HttpStatus.OK);
     }
 }

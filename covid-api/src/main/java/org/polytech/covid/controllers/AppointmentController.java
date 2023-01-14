@@ -80,22 +80,31 @@ public class AppointmentController {
         return new ResponseEntity<Appointment>(newApp, HttpStatus.OK);
     }
 
+    @RolesAllowed({"SuperAdministrator","Doctor"})
     @PutMapping("/{id}")
     public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
-        Appointment app = appRep.findById(id).orElseThrow();
-        app.setFirstName(firstName);
-        app.setLastName(lastName);
-        app.setCenter(center);
-        appRep.save(app);
-        return new ResponseEntity<Appointment>(app,HttpStatus.OK);
+        Optional <Appointment> app = appRep.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRep.findByEmail(authentication.getName());
+        if (!app.isPresent() || !user.isPresent() || (user.get().getRole() != Role.SuperAdministrator && user.get() != app.get().getDoctor()))
+            return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
+        app.get().setFirstName(firstName);
+        app.get().setLastName(lastName);
+        app.get().setCenter(center);
+        appRep.save(app.get());
+        return new ResponseEntity<Appointment>(app.get(),HttpStatus.OK);
     }
 
-    @RolesAllowed("SuperAdministrator")
+    @RolesAllowed({"SuperAdministrator","Doctor"})
     @DeleteMapping("/{id}")
     public ResponseEntity<Appointment> deleteApp(@PathVariable long id){
-        Appointment app = appRep.findById(id).orElseThrow();
-        app.setDisabled(true);
-        appRep.save(app);
-        return new ResponseEntity<Appointment>(app, HttpStatus.OK);
+        Optional <Appointment> app = appRep.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRep.findByEmail(authentication.getName());
+        if (!app.isPresent() || !user.isPresent() || (user.get().getRole() != Role.SuperAdministrator && user.get() != app.get().getDoctor()))
+            return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
+        app.get().setDisabled(true);
+        appRep.save(app.get());
+        return new ResponseEntity<Appointment>(app.get(), HttpStatus.OK);
     }
 }
