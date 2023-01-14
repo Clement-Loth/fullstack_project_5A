@@ -81,7 +81,7 @@ public class AppointmentController {
     @PostMapping("/public/app/")
     @Counted(value = "appointment.count", description = "Appointments created")
     @Timed(value = "appointment.time", description = "Time taken to add appointment")
-    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, String phone, String email, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date, Long centerId){
+    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, String phone, String email, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date, Long doctorId){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
         newApp.setLastName(lastName);
@@ -90,10 +90,11 @@ public class AppointmentController {
         newApp.setState("Waiting");
         newApp.setDate(date);
         newApp.setDisabled(false);
-        Optional <Center> center = centerRep.findById(centerId);
-        if (!center.isPresent())
+        Optional <User> doctor = userRep.findById(doctorId);
+        if (!doctor.isPresent())
             return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
-        newApp.setCenter(center.get());
+        newApp.setDoctor(doctor.get());
+        newApp.setCenter(doctor.get().getCenter());
         appRep.save(newApp);
         return new ResponseEntity<Appointment>(newApp, HttpStatus.OK);
     }
