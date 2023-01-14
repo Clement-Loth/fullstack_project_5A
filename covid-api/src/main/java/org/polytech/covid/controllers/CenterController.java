@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -72,21 +73,25 @@ public class CenterController {
     @PutMapping("/admin/center/{id}")
     @RolesAllowed("SuperAdministrator")
     public ResponseEntity<Center> updateCenter(@RequestParam String centerName, String centerCity, String centerState, String centerLocation, @PathVariable long id){
-        Center center = centerRep.findById(id).orElseThrow();
-        center.setCity(centerCity);
-        center.setLocation(centerLocation);
-        center.setName(centerName);
-        center.setState(centerState);
-        centerRep.save(center);
-        return new ResponseEntity<Center>(center,HttpStatus.OK);
+        Optional <Center> center = centerRep.findById(id);
+        if(!center.isPresent()) 
+        return new ResponseEntity<Center>(HttpStatus.NOT_FOUND);
+        center.get().setCity(centerCity);
+        center.get().setLocation(centerLocation);
+        center.get().setName(centerName);
+        center.get().setState(centerState);
+        centerRep.save(center.get());
+        return new ResponseEntity<Center>(center.get(),HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/center/{id}")
     @RolesAllowed("SuperAdministrator")
     public ResponseEntity<Center> deleteCenter(@PathVariable long id){
-        Center center = centerRep.findById(id).orElseThrow();
-        center.setDisabled(true);
-        centerRep.save(center);
-        return new ResponseEntity<Center>(center, HttpStatus.OK);
+        Optional <Center> center = centerRep.findById(id);
+        if(!center.isPresent()) 
+            return new ResponseEntity<Center>(HttpStatus.NOT_FOUND);
+        center.get().setDisabled(true);
+        centerRep.save(center.get());
+        return new ResponseEntity<Center>(center.get(), HttpStatus.OK);
     }
 }

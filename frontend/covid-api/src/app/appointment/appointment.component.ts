@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,7 @@ export class AppointmentComponent implements OnInit {
   submitted = false;
   returnUrl!: string;
   error = '';
+  isPhonechecked : boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router) { }
@@ -31,6 +32,7 @@ export class AppointmentComponent implements OnInit {
   get lastname() { return this.appointForm.get('lastname'); }
   get appointDate() {return this.appointForm.get('appointDate');}
   get mail() {return this.appointForm.get('mail');}
+  get phoneNum() {return this.appointForm.get('phoneNum')}
 
   onSubmit(){
     this.submitted = true;
@@ -44,5 +46,16 @@ export class AppointmentComponent implements OnInit {
 
   onCancel(){
     this.router.navigate(['centers']);
+  }
+
+  addPhone(checking : boolean){
+    this.isPhonechecked = checking;
+    if(checking){
+      this.appointForm.addControl("phoneNum", new FormControl('', Validators.required));
+    }
+    else{
+      this.appointForm.removeControl("phoneNum");
+    }
+    return;
   }
 }
