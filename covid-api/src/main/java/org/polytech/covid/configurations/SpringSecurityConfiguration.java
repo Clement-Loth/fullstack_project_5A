@@ -32,10 +32,11 @@ public class SpringSecurityConfiguration implements WebMvcConfigurer{
 			.authorizeHttpRequests((requests) -> requests
                 .antMatchers(HttpMethod.GET, "/public/**").permitAll()
 				.antMatchers("/admin/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/actuator/prometheus").hasRole("SuperAdministrator")
                 .anyRequest().denyAll()
 			)
 			.httpBasic(Customizer.withDefaults())
-			.cors().disable()
+			.cors().and()
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -44,6 +45,10 @@ public class SpringSecurityConfiguration implements WebMvcConfigurer{
 
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedMethods("PUT", "GET", "DELETE", "POST");;
+        registry.addMapping("/**")
+		.allowedOrigins("http://localhost:4200")
+		//.exposedHeaders(null)
+		//.allowedOriginPatterns("http://localhost:**")
+		.allowedMethods("PUT", "GET", "DELETE", "POST", "OPTIONS", "HEAD");
     }
 }
