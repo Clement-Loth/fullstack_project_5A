@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
@@ -31,19 +30,21 @@ public class UserController {
     @Autowired
     private UserRepository userRep;
 
+    @RolesAllowed("SuperAdministrator")
     @GetMapping("")
     public List<User> list(){
         return userRep.findAll();
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getByid(@PathVariable long id){
-        try{
-            User user = userRep.findById(id).orElseThrow();
-            return new ResponseEntity<User>(user, HttpStatus.OK);
-        }catch (NoSuchElementException e){
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
+        Optional <User> target = userRep.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = userRep.findByEmail(authentication.getName());
+        if(!user.isPresent() || user.get().getRole() != Role.SuperAdministrator && id != user.get().getId()) 
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);    
+        return new ResponseEntity<User>(target.get(), HttpStatus.OK);
     }
 
     @GetMapping("/email/{email}")
