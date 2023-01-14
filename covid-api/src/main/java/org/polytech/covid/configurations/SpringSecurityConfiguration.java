@@ -30,7 +30,7 @@ public class SpringSecurityConfiguration implements WebMvcConfigurer{
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-                .antMatchers(HttpMethod.GET, "/public/**").permitAll()
+                .antMatchers("/public/**").permitAll()
 				.antMatchers("/admin/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/actuator/prometheus").hasRole("SuperAdministrator")
                 .anyRequest().denyAll()
