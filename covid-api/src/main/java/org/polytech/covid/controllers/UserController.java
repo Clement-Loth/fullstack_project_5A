@@ -23,12 +23,15 @@ import org.polytech.covid.entities.User;
 import org.polytech.covid.entities.Role;
 import org.polytech.covid.repositories.UserRepository;
 import org.polytech.covid.entities.Center;
+import org.polytech.covid.repositories.CenterRepository;
 
 @RestController
 @RequestMapping("/admin/user")
 public class UserController {
     @Autowired
     private UserRepository userRep;
+    @Autowired
+    private CenterRepository centerRep;
 
     @RolesAllowed("SuperAdministrator")
     @GetMapping("")
@@ -68,8 +71,8 @@ public class UserController {
 
     @RolesAllowed("SuperAdministrator")
     @GetMapping("/center/{center_id}/{role}")
-    public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long center_id ){
-        List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, center_id);
+    public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long centerId ){
+        List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, centerId);
         if(userList.size() <1){
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
@@ -78,25 +81,29 @@ public class UserController {
 
     @RolesAllowed("SuperAdministrator")
     @PostMapping("/")
-    public ResponseEntity<User> newUser (@RequestParam String firstName, String lastName, String email, String phone, Center center){
+    public ResponseEntity<User> newUser (@RequestParam String firstName, String lastName, String email, String phone, Long centerId){
         User newUser = new User();
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
-        newUser.setCenter(center);
+        Optional<Center> center = centerRep.findById(centerId);
+        if (!center.isPresent())
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        newUser.setCenter(center.get());
         userRep.save(newUser);
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
+    public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){
         Optional <User> target = userRep.findById(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
-        if(!target.isPresent() || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !(target.get().getCenter().equals(user.get().getCenter()) && user.get().getRole() == Role.Administrator)) 
+        Optional<Center> center = centerRep.findById(centerId);
+        if(!center.isPresent() || !target.isPresent() || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !(target.get().getCenter().equals(user.get().getCenter()) && user.get().getRole() == Role.Administrator)) 
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         target.get().setFirstName(firstName);
         target.get().setLastName(lastName);
-        target.get().setCenter(center);
+        target.get().setCenter(center.get());
         userRep.save(target.get());
         return new ResponseEntity<User>(target.get(),HttpStatus.OK);
     }
