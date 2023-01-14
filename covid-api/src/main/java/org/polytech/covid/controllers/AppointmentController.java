@@ -1,6 +1,7 @@
 package org.polytech.covid.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -79,10 +81,15 @@ public class AppointmentController {
     @PostMapping("/public/app/")
     @Counted(value = "appointment.count", description = "Appointments created")
     @Timed(value = "appointment.time", description = "Time taken to add appointment")
-    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long centerId){
+    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, String phone, String email, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date, Long centerId){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
         newApp.setLastName(lastName);
+        newApp.setPhone(phone);
+        newApp.setEmail(email);
+        newApp.setState("Waiting");
+        newApp.setDate(date);
+        newApp.setDisabled(false);
         Optional <Center> center = centerRep.findById(centerId);
         if (!center.isPresent())
             return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
@@ -93,7 +100,7 @@ public class AppointmentController {
 
     @RolesAllowed({"SuperAdministrator","Doctor"})
     @PutMapping("/admin/app/{id}")
-    public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){
+    public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, String phone, String email, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date, Long centerId, @PathVariable long id){
         Optional <Appointment> app = appRep.findById(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
@@ -103,6 +110,8 @@ public class AppointmentController {
         app.get().setFirstName(firstName);
         app.get().setLastName(lastName);
         app.get().setCenter(center.get());
+        app.get().setPhone(phone);
+        app.get().setEmail(email);
         appRep.save(app.get());
         return new ResponseEntity<Appointment>(app.get(),HttpStatus.OK);
     }

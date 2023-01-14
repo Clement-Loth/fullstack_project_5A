@@ -1,5 +1,7 @@
 package org.polytech.covid.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class Appointment{
 
     private String firstName;
     private String lastName;
-    private java.util.Date date;
+    private LocalDateTime date;
     private String phone;
     private String email;
     private boolean disabled;
@@ -69,12 +71,12 @@ public class Appointment{
     }
 
 
-    public java.util.Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
 
-    public void setDate(java.util.Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
