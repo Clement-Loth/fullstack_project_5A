@@ -116,12 +116,12 @@ public class Appointment{
     }
 
 
-    public User getUser() {
+    public User getDoctor() {
         return doctor;
     }
 
 
-    public void setUser(User user) {
+    public void setDoctor(User user) {
         this.doctor = user;
     }
 
