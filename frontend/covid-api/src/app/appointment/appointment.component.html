@@ -25,6 +25,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="appointTime" class="text-secondary">Time of your Appointment</label>
+                    <input type="time" formControlName="appointTime" class="form-control" [ngClass]="{'is-invalid' : submitted && appointTime?.errors?.['required']}">
+                    <div *ngIf="submitted && appointTime?.errors?.['required']" class="text-danger">
+                        Please select a valid date for your appointment !
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="mail" class="text-secondary">E-mail address</label>
                     <input type="email" formControlName="mail" class="form-control" [ngClass]="{'is-invalid' : submitted && mail?.errors}" [email]="true">
                     <div *ngIf="submitted && mail?.errors" class="text-danger">
