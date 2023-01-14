@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-6 offset-sm-3">
-        <div class="jumbotron bg-light border border-primary rounded p-3">
+        <div class="jumbotron border border-primary rounded p-3">
             <h3 class="d-flex justify-content-center text-success">Make an appointment</h3>
             <form [formGroup]="appointForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
@@ -31,8 +31,15 @@
                         Please type a valid email address !
                     </div>
                 </div>
-
-
+                <mat-checkbox [color]="'primary'" (change)="addPhone($event.checked)"> I would like to receive a SMS for my appointment
+                </mat-checkbox>
+                <div class="form-group" *ngIf="isPhonechecked">
+                    <label for="phoneNum" class="text-secondary">Enter your phone number</label>
+                    <input type="text" formControlName="phoneNum" class="form-control" [ngClass]="{'is-invalid' : submitted && phoneNum?.errors?.['required']}">
+                    <div *ngIf="submitted && phoneNum?.errors?.['required']" class="text-danger">
+                        Please type a valid phone number !
+                    </div>
+                </div>
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                 <div class="form-group"><button [disabled]="loading" class="btn btn-success mt-3">Validate your appointment</button></div>
             </form>
