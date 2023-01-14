@@ -18,7 +18,7 @@ export class FormCenterComponent implements OnInit {
   returnUrl!: string;
   error = '';
 
-  center?: Center;
+  center!: Center;
   title: string =  '';
 
   isAddCenter: boolean = false;
@@ -35,18 +35,22 @@ export class FormCenterComponent implements OnInit {
     });
     if(this.router.url == "/center/add"){
       this.isAddCenter = true;
-      this.title = "Add a center";
+      this.title = "Add";
     }else if(this.route.snapshot.paramMap.get('id')){
       let id = BigInt(this.route.snapshot.paramMap.get('id')!);
       this.isEditCenter = true;
+      this.centerForm.addControl('state', new FormControl('', Validators.required));
       this.centerService.getById(id).pipe(first()).subscribe((center : Center) =>{
         this.center = center;
+        console.log(this.center)      
+        this.state?.setValue(this.center.state);
+        this.location?.setValue(this.center.location);
+        this.name?.setValue(this.center.name);
+        this.city?.setValue(this.center.city);
       });
-      this.title = "Edit a center"
-      this.centerForm.addControl("state", new FormControl(this.center?.state, Validators.required));
-      this.location?.setValue(this.center?.location);
-      this.name?.setValue(this.center?.name);
-      this.city?.setValue(this.center?.city);
+      this.title = "Edit";
+      
+      
     }
   }
 

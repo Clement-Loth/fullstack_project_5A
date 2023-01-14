@@ -17,15 +17,15 @@ export class AdminComponent implements OnInit {
   users? : User[];
 
   ngOnInit(): void {
-    this.centers = this.centerService.getAllVaxxCenters();
+    //this.centers = this.centerService.getAllVaxxCenters();
 
     this.userService.getAll().pipe(first()).subscribe((users : User[]) =>{
       this.users = users;
     })
 
-    // this.centerService.getAll().pipe(first()).subscribe((centers : Center[]) =>{
-    //   this.centers = centers;
-    // });
+    this.centerService.getAll().pipe(first()).subscribe((centers : Center[]) =>{
+      this.centers = centers;
+    });
 
   }
 
