@@ -16,7 +16,8 @@ const routes: Routes = [
   {path: "login", component: FormLoginComponent},
   {path: "signin", component: FormSigninComponent, canActivate:[AuthGuard]},
   {path: "admin", component: AdminComponent},
-  {path: "center/:id/edit", component:FormCenterComponent}
+  {path: "center/edit/:id", component:FormCenterComponent},
+  {path: "center/add", component:FormCenterComponent}
 ];
 
 @NgModule({

@@ -1,1 +1,42 @@
-<p>form-center works!</p>
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <div class="jumbotron bg-light border border-primary rounded p-3">
+            <h1 class="d-flex justify-content-center text-success">{{title}}</h1>
+            <form [formGroup]="centerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="location" class="text-secondary" >Location</label>
+                    <input type="text" formControlName="location" class="form-control" [ngClass]="{'is-invalid' : submitted && location?.errors}" [email]="true">
+                    <div *ngIf="submitted && location?.errors" class="text-danger">
+                        Required ! 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="text-secondary">Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid' : submitted && name?.errors?.['required']}">
+                    <div *ngIf="submitted && name?.errors?.['required']" class="text-danger">
+                        Required !
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="text-secondary">City</label>
+                    <input type="text" formControlName="city" class="form-control" [ngClass]="{'is-invalid' : submitted && city?.errors?.['required']}">
+                    <div *ngIf="submitted && city?.errors?.['required']" class="text-danger">
+                        Required !
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="isEditCenter">
+                    <label for="state" class="text-secondary">State</label>
+                    <select formControlName="state" class="form-control" [ngClass]="{'is-invalid' : submitted && state?.errors?.['required']}">
+                        <option [value]="'Open'">Open</option>
+                        <option [value]="'Closed'">Closed</option>
+                    </select>
+                    <div *ngIf="submitted && state?.errors?.['required']" class="text-danger">
+                        Required !
+                    </div>
+                </div>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <div class="form-group"><button [disabled]="loading" class="btn btn-primary mt-3">{{"Create" | uppercase}}</button></div>
+            </form>
+        </div>
+    </div>
+</div>

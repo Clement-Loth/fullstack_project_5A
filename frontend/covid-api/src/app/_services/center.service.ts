@@ -24,5 +24,9 @@ export class CenterService {
     return this.http.get<Center[]>(`${environment.apiPath}/public/center`) ;
   }
 
+  getById(id: bigint){
+    return this.http.get<Center>(`${environment.apiPath}/public/center/${id}`)
+  }
+
   // ICI requête HTTP vers le back pour récupérer les centres !
 }
