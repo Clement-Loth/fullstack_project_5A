@@ -2,9 +2,14 @@ spring:
   datasource: 
     url: jdbc:postgresql://localhost:5432/covid-db?stringtype=unspecified
     username: postgres
-    password: admin
+    password: postgres
   jpa: 
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
   liquibase:
     enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

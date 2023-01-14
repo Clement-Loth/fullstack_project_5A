@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -74,6 +77,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/")
+    @Counted(value = "appointment.count", description = "Appointments created")
+    @Timed(value = "appointment.time", description = "Time taken to add appointment")
     public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long centerId){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
