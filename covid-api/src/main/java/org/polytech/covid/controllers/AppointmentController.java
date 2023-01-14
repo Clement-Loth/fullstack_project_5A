@@ -21,10 +21,11 @@ import java.util.Optional;
 import javax.annotation.security.RolesAllowed;
 
 import org.polytech.covid.entities.Appointment;
-import org.polytech.covid.entities.User;
 import org.polytech.covid.repositories.AppointmentRepository;
+import org.polytech.covid.entities.User;
 import org.polytech.covid.repositories.UserRepository;
 import org.polytech.covid.entities.Center;
+import org.polytech.covid.repositories.CenterRepository;
 import org.polytech.covid.entities.Role;
 
 @RestController
@@ -34,6 +35,8 @@ public class AppointmentController {
     private AppointmentRepository appRep;
     @Autowired
     private UserRepository userRep;
+    @Autowired
+    private CenterRepository centerRep;
 
     @RolesAllowed("SuperAdministrator")
     @GetMapping("")
@@ -71,11 +74,14 @@ public class AppointmentController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Center center){
+    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long center_id){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
         newApp.setLastName(lastName);
-        newApp.setCenter(center);
+        Optional <Center> center = centerRep.findById(center_id);
+        if (!center.isPresent())
+            return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
+        newApp.setCenter(center.get());
         appRep.save(newApp);
         return new ResponseEntity<Appointment>(newApp, HttpStatus.OK);
     }
