@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { BasicAuthInterceptor } from './_interceptor/basic-auth.interceptor';
+import { ErrorInterceptor } from './_interceptor/error.interceptor';
 
 import { AppComponent } from './app.component';
 import { CenterComponent } from './center/center.component';
@@ -32,7 +34,11 @@ import { FormCenterComponent } from './form-center/form-center.component';
     ReactiveFormsModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
