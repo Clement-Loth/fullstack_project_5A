@@ -45,11 +45,11 @@ public class AppointmentController {
     }
 
     @GetMapping("/doctor/{doctor_id}")
-    public ResponseEntity<List<Appointment>> getByDoctor(@PathVariable Long doctor_id){
-        List<Appointment> appList = appRep.findAllByDoctor_id(doctor_id);
+    public ResponseEntity<List<Appointment>> getByDoctor(@PathVariable Long doctorId){
+        List<Appointment> appList = appRep.findAllByDoctor_id(doctorId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
-        if(appList.size()<1 || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !doctor_id.equals(user.get().getId())) 
+        if(appList.size()<1 || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !doctorId.equals(user.get().getId())) 
             return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<List<Appointment>>(appList, HttpStatus.OK);
     }
@@ -65,8 +65,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/center/{center_id}")
-    public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long center_id){
-        List<Appointment> appList = appRep.findAllByCenter_id(center_id);
+    public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long centerId){
+        List<Appointment> appList = appRep.findAllByCenter_id(centerId);
         if(appList.size() <1){
             return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }
@@ -74,11 +74,11 @@ public class AppointmentController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long center_id){
+    public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long centerId){
         Appointment newApp = new Appointment();
         newApp.setFirstName(firstName);
         newApp.setLastName(lastName);
-        Optional <Center> center = centerRep.findById(center_id);
+        Optional <Center> center = centerRep.findById(centerId);
         if (!center.isPresent())
             return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
         newApp.setCenter(center.get());
@@ -88,15 +88,16 @@ public class AppointmentController {
 
     @RolesAllowed({"SuperAdministrator","Doctor"})
     @PutMapping("/{id}")
-    public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Center center, @PathVariable long id){
+    public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){
         Optional <Appointment> app = appRep.findById(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
-        if (!app.isPresent() || !user.isPresent() || (user.get().getRole() != Role.SuperAdministrator && user.get() != app.get().getDoctor()))
+        Optional<Center> center = centerRep.findById(centerId);
+        if (!center.isPresent() || !app.isPresent() || !user.isPresent() || (user.get().getRole() != Role.SuperAdministrator && user.get() != app.get().getDoctor()))
             return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
         app.get().setFirstName(firstName);
         app.get().setLastName(lastName);
-        app.get().setCenter(center);
+        app.get().setCenter(center.get());
         appRep.save(app.get());
         return new ResponseEntity<Appointment>(app.get(),HttpStatus.OK);
     }
