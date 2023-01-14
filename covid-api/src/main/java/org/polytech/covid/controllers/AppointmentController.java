@@ -91,7 +91,7 @@ public class AppointmentController {
         newApp.setDate(date);
         newApp.setDisabled(false);
         Optional <User> doctor = userRep.findById(doctorId);
-        if (!doctor.isPresent())
+        if (!doctor.isPresent() || doctor.get().getRole() != Role.Doctor)
             return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
         newApp.setDoctor(doctor.get());
         newApp.setCenter(doctor.get().getCenter());
