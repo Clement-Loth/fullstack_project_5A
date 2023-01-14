@@ -32,7 +32,7 @@ import org.polytech.covid.repositories.CenterRepository;
 import org.polytech.covid.entities.Role;
 
 @RestController
-@RequestMapping("/admin/app")
+@RequestMapping("")
 public class AppointmentController {
     @Autowired
     private AppointmentRepository appRep;
@@ -42,12 +42,12 @@ public class AppointmentController {
     private CenterRepository centerRep;
 
     @RolesAllowed("SuperAdministrator")
-    @GetMapping("")
+    @GetMapping("/admin/app")
     public List<Appointment> list(){
         return appRep.findAll();
     }
 
-    @GetMapping("/doctor/{doctor_id}")
+    @GetMapping("/admin/app/doctor/{doctor_id}")
     public ResponseEntity<List<Appointment>> getByDoctor(@PathVariable Long doctorId){
         List<Appointment> appList = appRep.findAllByDoctor_id(doctorId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,7 +57,7 @@ public class AppointmentController {
         return new ResponseEntity<List<Appointment>>(appList, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/app/{id}")
     public ResponseEntity<Appointment> getByid(@PathVariable long id){
         try{
             Appointment app = appRep.findById(id).orElseThrow();
@@ -67,7 +67,7 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping("/center/{center_id}")
+    @GetMapping("/admin/app/center/{center_id}")
     public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long centerId){
         List<Appointment> appList = appRep.findAllByCenter_id(centerId);
         if(appList.size() <1){
@@ -76,7 +76,7 @@ public class AppointmentController {
         return new ResponseEntity<List<Appointment>>(appList, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/public/app/")
     @Counted(value = "appointment.count", description = "Appointments created")
     @Timed(value = "appointment.time", description = "Time taken to add appointment")
     public ResponseEntity<Appointment> newApp (@RequestParam String firstName, String lastName, Long centerId){
@@ -92,7 +92,7 @@ public class AppointmentController {
     }
 
     @RolesAllowed({"SuperAdministrator","Doctor"})
-    @PutMapping("/{id}")
+    @PutMapping("/admin/app/{id}")
     public ResponseEntity<Appointment> updateApp(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){
         Optional <Appointment> app = appRep.findById(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -108,7 +108,7 @@ public class AppointmentController {
     }
 
     @RolesAllowed({"SuperAdministrator","Doctor"})
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/app/{id}")
     public ResponseEntity<Appointment> deleteApp(@PathVariable long id){
         Optional <Appointment> app = appRep.findById(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
