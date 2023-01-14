@@ -20,6 +20,9 @@ export class FormLoginComponent implements OnInit {
     private router: Router, private authService : AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(this.router.url == "/logout"){
+      this.authService.logout();
+    }
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
