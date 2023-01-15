@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,6 +36,8 @@ public class UserController {
     private CenterRepository centerRep;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RolesAllowed("SuperAdministrator")
     @GetMapping("")
@@ -87,10 +90,11 @@ public class UserController {
 
     @RolesAllowed("SuperAdministrator")
     @PostMapping("/")
-    public ResponseEntity<User> newUser (@RequestParam String firstName, String lastName, String email, String phone, Long centerId){
+    public ResponseEntity<User> newUser (@RequestParam String firstName, String lastName, String email, String phone, Long centerId, String password){
         User newUser = new User();
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
+        newUser.setPassword(passwordEncoder.encode(password));
         Optional<Center> center = centerRep.findById(centerId);
         if (!center.isPresent())
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
