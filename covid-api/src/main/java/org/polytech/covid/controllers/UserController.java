@@ -109,6 +109,7 @@ public class UserController {
         User newUser = new User();
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
+        newUser.setEmail(email);
         newUser.setPassword(passwordEncoder.encode(password));
         Optional<Center> center = centerRep.findById(centerId);
         if (!center.isPresent())
