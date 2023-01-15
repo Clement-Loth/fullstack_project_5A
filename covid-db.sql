@@ -16,8 +16,8 @@ VALUES ('Centre de vaccination de Metz', 'Boulevard Saint-Symphorien', 'Open','L
 INSERT INTO CENTERS (name, location, state, city, disabled)
 VALUES ('Pharmacie de Serre', '20 Rue de Serre', 'Open','Pagny-sur-Moselle',false);
 
-DROP TYPE IF EXISTS ROLES CASCADE;
-CREATE TYPE ROLES as ENUM('Administrator','Doctor','SuperAdministrator');
+DROP TYPE IF EXISTS ROLE CASCADE;
+CREATE TYPE ROLE as ENUM('Administrator','Doctor','SuperAdministrator');
 DROP TABLE IF EXISTS USERS CASCADE;
 CREATE TABLE USERS(
 	id bigserial PRIMARY KEY,
@@ -27,7 +27,7 @@ CREATE TABLE USERS(
 	email varchar(50) not NULL UNIQUE,
 	phone varchar(20),
 	disabled boolean,
-	role ROLES not NULL,
+	role ROLE not NULL,
 	center_id bigint,
 	FOREIGN KEY(center_id) REFERENCES CENTERS(id)	
 );
