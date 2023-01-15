@@ -18,4 +18,8 @@ export class UserService {
   getById(id:bigint){
     return this.http.get<User>(`${environment.apiPath}/admin/user/${id}`);
   }
+
+  createDoctor(){
+
+  }
 }
