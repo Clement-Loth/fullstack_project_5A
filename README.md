@@ -3,7 +3,7 @@
 
 BERNABE Jimmy 31708438  
 JACQUE Axel 31814730  
-LOTH Clément  
+LOTH Clément 31805733  
   
 L'objectif de ce projet est de concevoir un site permettant à un utilisateur de prendre un rendez-vous auprès d'un docteur dans un centre laissé au choix de l'utilisateur. Afin de prendre ce rendez-vous, l'utilisateur devra préciser son nom, prénom, numéros de téléphone et adresse mail afin d'être recontacté.
   
