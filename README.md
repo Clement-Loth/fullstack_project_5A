@@ -1,5 +1,10 @@
 # fullstack_project_5A
 
+BERNABE Jimmy 31708438
+JACQUE Axel
+LOTH Clément
+
+
 L'objectif de ce projet est de concevoir un site permettant à un utilisateur de prendre un rendez-vous auprès d'un docteur dans un centre laissé au choix de l'utilisateur. Afin de prendre ce rendez-vous, l'utilisateur devra préciser son nom, prénom, numéros de téléphone et adresse mail afin d'être recontacté.
 
 Le projet est structuré autour de trois entités : les centres, les utilisateurs se partageant les rôles de docteurs, administrateur de centre et super administrateur et enfin les rendez-vous.
