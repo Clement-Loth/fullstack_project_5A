@@ -36,8 +36,8 @@ public class User {
     @JoinColumn(foreignKey=@ForeignKey(name="center_id"))
 	private Center center;
 
+    @Column(columnDefinition = "enum('Administrator','Doctor','SuperAdministrator')")
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "genre_enum_type")
     private Role role;
 
     public User() {
