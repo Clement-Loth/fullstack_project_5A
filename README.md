@@ -39,3 +39,11 @@ Lorsqu'un objet est désactivé, il n'est pas supprimé de la base de données, 
 Un système de métrique permet de compter le nombre de rendez-vous pris ainsi que le temps écoulé lors de la prise de rendez-vous. Seul un super administrateur peut accéder à ces métriques. Son end point est dans springSecurity configuration.
 
 À chaque requête, le serveur renvoit un Etag.
+
+# Front-end
+
+La page principale du front end est la page présentant les différents centres, il est possible d'y prendre un rendez-vous en appuyant sur le bouton correspondant, en rentrant ses informations personnelles et en sélectionnant un docteur.
+
+Le permet également d'accéder à une page de login pour les administrateurs. Une fois connectés, les administrateurs peuvent ajouter et modifier des centres ou des docteurs
+
+Il est enfin possible de logout du compte administrateur d'un click sur le bouton logout. Il faut actuellement recharger la page après un login ou un logout pour que les changements soient visibles.
