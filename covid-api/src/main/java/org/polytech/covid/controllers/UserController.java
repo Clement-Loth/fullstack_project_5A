@@ -65,9 +65,12 @@ public class UserController {
 
     @GetMapping("/role/{role}")
     public ResponseEntity<List<User>> getByRole(@PathVariable String role){
-        List<User> userList = userRep.findByRole(Role.valueOf(role));
-        if(userList.size() <1){
-            return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
+        try {
+            List<User> userList = userRep.findByRole(Role.valueOf(role));
+            if(userList.size() <1){
+                return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
+            }
+        } catch (IllegalArgumentException e) {
         }
         return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
     }
