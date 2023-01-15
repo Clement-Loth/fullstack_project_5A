@@ -9,6 +9,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { FormCenterComponent } from './form-center/form-center.component';
 import { HttpcompComponent } from './httpcomp/httpcomp.component';
+import { SupadminComponent } from './supadmin/supadmin.component';
 
 const routes: Routes = [
   {path: "centers", component: CenterComponent},
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: "login", component: FormLoginComponent},
   {path: "signin", component: FormSigninComponent, canActivate:[AuthGuard], data: {role: ("SuperAdministrator")}},
   {path: "signin/:id", component: FormSigninComponent, canActivate:[AuthGuard], data: {role: ("SuperAdministrator")}},
-  {path: "admin", component: AdminComponent, canActivate:[AuthGuard], data: {role: ("Administrator" || "SuperAdministrator")}},
+  {path: "supadmin", component: SupadminComponent, canActivate:[AuthGuard], data: {role: ("SuperAdministrator")}},
   {path: "center/edit/:id", component:FormCenterComponent, canActivate:[AuthGuard], data: {role: ("SuperAdministrator")}},
   {path: "center/add", component:FormCenterComponent, canActivate:[AuthGuard], data: {role: ("SuperAdministrator")}},
   {path: "logout", component:FormLoginComponent},

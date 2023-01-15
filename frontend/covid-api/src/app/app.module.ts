@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 import { FormCenterComponent } from './form-center/form-center.component';
 import { BannerComponent } from './banner/banner.component';
 import { HttpcompComponent } from './httpcomp/httpcomp.component';
+import { SupadminComponent } from './supadmin/supadmin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpcompComponent } from './httpcomp/httpcomp.component';
     FormCenterComponent,
     BannerComponent,
     HttpcompComponent,
+    SupadminComponent,
   ],
   imports: [
     BrowserModule,

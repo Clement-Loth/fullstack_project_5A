@@ -79,7 +79,7 @@ export class FormCenterComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next :() => {
-          this.router.navigate(["/admin"]);
+          this.router.navigate(["/supadmin"]);
         },
         error: () => {
           this.error = "Oopsies ;D";
