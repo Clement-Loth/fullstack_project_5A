@@ -12,22 +12,14 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     let user = this.authService.userValue;
-    let roles = "Doctor" || "Administrator" || "SuperAdministrator";
     if(user){
       this.isLogged = true;
-      switch(user.role && roles){
-        case "Doctor" : 
-          this.activeRole = "Doctor";
-        break;
-        case "Administrator" :
-          this.activeRole = "Administrator";
-        break; 
-
-        case "SuperAdministrator" : 
-          this.activeRole = "SuperAdministrator";
-        break;
-        default: 
-        break;
+      if(user.role == 'Doctor'){
+        this.activeRole = 'Doctor'
+      }else if(user.role == 'Administrator'){
+        this.activeRole = 'Administrator'
+      }else if(user.role == 'SuperAdministrator'){
+        this.activeRole = 'SuperAdministrator'
       }
     }else{
       this.isLogged = false;

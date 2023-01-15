@@ -6,7 +6,10 @@
                 <a class="nav-link" [ngClass]="{'active' : getRoute() == '/centers'}" href="/centers">Centers</a>
             </li>
             <li class="nav-item" >
-                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/admin'}" href="/admin" *ngIf="isLogged==true && activeRole=='SuperAdministrator'">SuperAdmin panel</a>
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/supadmin'}" href="/supadmin" *ngIf="isLogged==true && activeRole=='SuperAdministrator'">SuperAdmin panel</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/admin'}" href="/admin" *ngIf="isLogged==true && activeRole=='Administrator'">Admin panel</a>
             </li>
             <li class="nav-item" >
                 <a class="nav-link" [ngClass]="{'active' : getRoute() == '/login'}" href="/login" *ngIf="isLogged==false">Login</a>

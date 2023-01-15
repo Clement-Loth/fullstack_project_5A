@@ -38,6 +38,15 @@
                         Please type a valid email address !
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="doctor" class="text-secondary">Doctor</label>
+                    <select formControlName="doctor" class="form-control" [ngClass]="{'is-invalid' : submitted && doctor?.errors?.['required']}">
+                        <option *ngFor="let xdoctor of doctors" [value]="xdoctor.name">{{xdoctor.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && doctor?.errors?.['required']" class="text-danger">
+                        Required !
+                    </div>
+                </div>
                 <mat-checkbox [color]="'primary'" (change)="addPhone($event.checked)"> I would like to receive a SMS for my appointment
                 </mat-checkbox>
                 <div class="form-group" *ngIf="isPhonechecked">
