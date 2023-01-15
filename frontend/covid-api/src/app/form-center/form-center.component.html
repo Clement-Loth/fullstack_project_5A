@@ -5,7 +5,7 @@
             <form [formGroup]="centerForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="location" class="text-secondary" >Location</label>
-                    <input type="text" formControlName="location" class="form-control" [ngClass]="{'is-invalid' : submitted && location?.errors}" [email]="true">
+                    <input type="text" formControlName="location" class="form-control" [ngClass]="{'is-invalid' : submitted && location?.errors}">
                     <div *ngIf="submitted && location?.errors" class="text-danger">
                         Required ! 
                     </div>

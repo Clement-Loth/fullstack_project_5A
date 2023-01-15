@@ -1,19 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-dark px-3 mb-2">
-    <a class="navbar-brand" href="#"> {{ title }} </a>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/centers'}" href="/centers">Centers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/login'}" href="/login">Login [TODO]</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/login'}" href="/login">Logout [TODO]</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<app-banner></app-banner>
 
 <div id="comps">
     <router-outlet></router-outlet>

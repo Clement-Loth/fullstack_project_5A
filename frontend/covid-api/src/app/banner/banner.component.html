@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-dark px-3 mb-2">
+    <a class="navbar-brand" href="#"> {{ title }} </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/centers'}" href="/centers">Centers</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/admin'}" href="/admin" *ngIf="isLogged==true">Admin</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/login'}" href="/login" *ngIf="isLogged==false">Login</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" [ngClass]="{'active' : getRoute() == '/login'}" href="/logout" *ngIf="isLogged==true">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

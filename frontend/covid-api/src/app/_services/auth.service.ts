@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
@@ -32,7 +32,15 @@ export class AuthService {
               localStorage.setItem('user', JSON.stringify(user));
               this.userSubject.next(user);
               return user;
-          }));
+            }), catchError(err => {
+            if ([401, 403].includes(err.status)) {
+                // auto logout if 401 response returned from api
+                this.logout();
+            }
+            return throwError(() => err.error.message || err.statusText);
+          })
+            
+            );
   }
 
 //   login(username: string, password: string) {

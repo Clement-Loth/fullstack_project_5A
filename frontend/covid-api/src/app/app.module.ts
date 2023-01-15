@@ -15,6 +15,7 @@ import { FormLoginComponent } from './form-login/form-login.component';
 import { FormSigninComponent } from './form-signin/form-signin.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormCenterComponent } from './form-center/form-center.component';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormCenterComponent } from './form-center/form-center.component';
     FormSigninComponent,
     AdminComponent,
     FormCenterComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,

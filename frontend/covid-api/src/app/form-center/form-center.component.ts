@@ -41,8 +41,7 @@ export class FormCenterComponent implements OnInit {
       this.isEditCenter = true;
       this.centerForm.addControl('state', new FormControl('', Validators.required));
       this.centerService.getById(id).pipe(first()).subscribe((center : Center) =>{
-        this.center = center;
-        console.log(this.center)      
+        this.center = center;    
         this.state?.setValue(this.center.state);
         this.location?.setValue(this.center.location);
         this.name?.setValue(this.center.name);
@@ -60,9 +59,32 @@ export class FormCenterComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-
+    let id = BigInt(this.route.snapshot.paramMap.get('id')!);
     if (this.centerForm.invalid) {
       return;
+    }
+
+    if(this.isAddCenter){
+      this.centerService.newCenter(this.name?.value,this.city?.value,'Closed',this.location?.value).pipe(first()).subscribe({
+        next: () => {
+          this.router.navigate(["/admin"]);
+        },
+        error: () => {
+          this.error = "Oopsies ;D";
+        }
+
+      });
+    }else if(this.isEditCenter){
+      this.centerService.updateCenter(this.name?.value,this.city?.value,this.state?.value,this.location?.value,id)
+      .pipe(first())
+      .subscribe({
+        next :() => {
+          this.router.navigate(["/admin"]);
+        },
+        error: () => {
+          this.error = "Oopsies ;D";
+        }
+      })
     }
 
   }

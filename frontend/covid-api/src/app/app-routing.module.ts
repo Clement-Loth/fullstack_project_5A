@@ -15,9 +15,10 @@ const routes: Routes = [
   {path: "", redirectTo: "/centers", pathMatch: "full"},
   {path: "login", component: FormLoginComponent},
   {path: "signin", component: FormSigninComponent, canActivate:[AuthGuard]},
-  {path: "admin", component: AdminComponent},
-  {path: "center/edit/:id", component:FormCenterComponent},
-  {path: "center/add", component:FormCenterComponent}
+  {path: "admin", component: AdminComponent, canActivate:[AuthGuard]},
+  {path: "center/edit/:id", component:FormCenterComponent, canActivate:[AuthGuard]},
+  {path: "center/add", component:FormCenterComponent, canActivate:[AuthGuard]},
+  {path: "logout", component:FormLoginComponent}
 ];
 
 @NgModule({
