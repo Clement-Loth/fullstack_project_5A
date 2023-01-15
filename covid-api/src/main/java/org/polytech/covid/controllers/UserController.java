@@ -111,6 +111,7 @@ public class UserController {
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setRole((Role.Doctor));
         Optional<Center> center = centerRep.findById(centerId);
         if (!center.isPresent())
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -118,25 +119,6 @@ public class UserController {
         userRep.save(newUser);
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
-
-    @RolesAllowed("SuperAdministrator")
-    @PostMapping("/admin/user/SuperAdministrator")
-    public void newSuperAdministrator (){
-        userService.createSuperAdminDefault();
-    }
-
-    @RolesAllowed("SuperAdministrator")
-    @PostMapping("/admin/user/Administrator")
-    public void newAdministrator (){
-        userService.createAdminDefault();
-    }
-
-    @RolesAllowed("SuperAdministrator")
-    @PostMapping("/admin/user/Doctor")
-    public void newSDoctor (){
-        userService.createDoctorDefault();
-    }
-
 
     @PutMapping("/admin/user/{id}")
     public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){

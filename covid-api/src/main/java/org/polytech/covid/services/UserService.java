@@ -10,6 +10,7 @@ import org.polytech.covid.entities.Center;
 import org.polytech.covid.entities.MyUserDetails;
 import org.polytech.covid.entities.Role;
 import org.polytech.covid.entities.User;
+import org.polytech.covid.repositories.CenterRepository;
 import org.polytech.covid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CenterRepository centerRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -43,30 +46,25 @@ public class UserService implements UserDetailsService {
     }
 
     @PostConstruct
-    public void createSuperAdminDefault() {
-        createUser("test@toto.fr","toto","Test","Test","0",Role.SuperAdministrator);
+    public void createDefaultUser() {
+        createUser("doc1@toto.fr","toto","Test","Test","0",Role.Doctor,1);
+        createUser("doc2@toto.fr","toto","Test","Test","0",Role.Doctor,2);
+        createUser("doc3@toto.fr","toto","Test","Test","0",Role.Doctor,3);
+        createUser("admin@toto.fr","toto","Test","Test","0",Role.Administrator,1);
+        createUser("test@toto.fr","toto","Test","Test","0",Role.SuperAdministrator,1);
     }
 
-    @PostConstruct
-    public void createAdminDefault() {
-        createUser("admin@toto.fr","toto","Test","Test","0",Role.Administrator);
-    }
-
-    @PostConstruct
-    public void createDoctorDefault() {
-        createUser("doc@toto.fr","toto","Test","Test","0",Role.Doctor);
-    }
-
-    public boolean createUser(String email, String password, String firstName, String lastName, String phone, Role role) {
+    public boolean createUser(String email, String password, String firstName, String lastName, String phone, Role role, long centerId) {
         if(userRepository.findByEmail(email).isEmpty()){
-            User superAdmin = new User();
-            superAdmin.setEmail(email);
-            superAdmin.setFirstName(firstName);
-            superAdmin.setLastName(lastName);
-            superAdmin.setPassword(passwordEncoder.encode(password));
-            superAdmin.setPhone(phone);
-            superAdmin.setRole(role);
-            this.userRepository.save(superAdmin);
+            User user = new User();
+            user.setEmail(email);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPassword(passwordEncoder.encode(password));
+            user.setPhone(phone);
+            user.setRole(role);
+            user.setCenter(centerRepository.findById(centerId).get());
+            this.userRepository.save(user);
             return true;
         }
         return false;

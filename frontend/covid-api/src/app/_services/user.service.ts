@@ -12,7 +12,7 @@ export class UserService {
 }
 
   getAll(){
-    return this.http.get<User[]>(`${environment.apiPath}/admin/user`);
+    return this.http.get<User[]>(`${environment.apiPath}/admin/user/`);
   }
 
   getById(id:bigint){

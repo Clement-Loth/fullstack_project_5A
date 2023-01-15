@@ -30,7 +30,7 @@ export class AppointmentComponent implements OnInit {
       appointDate: ['',Validators.required],
       mail: ['', Validators.required],
       appointTime: ['',Validators.required],
-      doctor: ['', Validators.required]
+      //doctor: ['', Validators.required]
   });
 
 
@@ -42,7 +42,7 @@ export class AppointmentComponent implements OnInit {
   get mail() {return this.appointForm.get('mail')}
   get phoneNum() {return this.appointForm.get('phoneNum')}
   get appointTime() {return this.appointForm.get('appointTime')}
-  get doctor(){ return this.appointForm.get('doctor')}
+  //get doctor(){ return this.appointForm.get('doctor')}
 
   onCancel(){
     this.router.navigate(['centers']);
@@ -62,8 +62,8 @@ export class AppointmentComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     let dateObj = new Date(this.appointDate?.value+ 'T'+ this.appointTime?.value);
-    let centerId = BigInt(this.route.snapshot.paramMap.get('id')!);
-    let doctorId = this.doctors?.find(doc => doc.name = this.doctor?.value)?.id!
+    let doctorId = BigInt(this.route.snapshot.paramMap.get('id')!);
+    //let doctorId = this.doctors?.find(doc => doc.name = this.doctor?.value)?.id!
     let phoneNumber = '';
     if (this.appointForm.invalid) {
       return;
