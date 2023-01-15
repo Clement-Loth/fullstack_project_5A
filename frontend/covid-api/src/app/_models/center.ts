@@ -1,5 +1,5 @@
 export interface Center {
-    id: number;
+    id: bigint;
     location: string;
     name: string;
     state: string;

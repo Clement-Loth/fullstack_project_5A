@@ -33,7 +33,8 @@ export class FormSigninComponent implements OnInit {
       password: ['', Validators.required],
       fullname: ['', Validators.required],
       lastname: ['', Validators.required],
-      center: ['', Validators.required]
+      center: ['', Validators.required],
+      phone: ['', Validators.required]
   });
 
   // Get list of centers 
@@ -60,15 +61,25 @@ export class FormSigninComponent implements OnInit {
   get fullname() { return this.signInForm.get('fullname'); }
   get lastname() { return this.signInForm.get('lastname'); }
   get center() { return this.signInForm.get('center');}
+  get phone() {return this.signInForm.get('phone')}
 
   onSubmit(){
     this.submitted = true;
-
+    let centerId = this.centers?.find(cent => cent.name == this.center?.value)?.id!
     if (this.signInForm.invalid) {
       return;
   }
     if(this.isSignIn){
-      
+      this.userService.createDoctor(this.fullname?.value,this.lastname?.value,this.username?.value,this.phone?.value,centerId,this.password?.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.router.navigate(["/supadmin"]);
+        },
+        error: () => {
+          this.error = "Oopsies ;D";
+        }
+      });
     }
 
     // this.router.navigate(['centers']);

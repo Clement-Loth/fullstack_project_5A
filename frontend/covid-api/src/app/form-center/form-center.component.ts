@@ -67,7 +67,7 @@ export class FormCenterComponent implements OnInit {
     if(this.isAddCenter){
       this.centerService.newCenter(this.name?.value,this.city?.value,'Closed',this.location?.value).pipe(first()).subscribe({
         next: () => {
-          this.router.navigate(["/admin"]);
+          this.router.navigate(["/supadmin"]);
         },
         error: () => {
           this.error = "Oopsies ;D";
