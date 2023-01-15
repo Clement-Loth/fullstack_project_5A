@@ -23,7 +23,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     localStorage.removeItem('user');
-    let mockUser: User = {email: "", authdata : window.btoa(username + ':' + password), password: "", firstname: "", lastname: "", phone: "", disabled:false};
+    let mockUser: User = {email: "", authdata : window.btoa(username + ':' + password), password: "", firstName: "", lastName: "", phone: "", disabled:false};
     this.userSubject = new BehaviorSubject<User | null>(mockUser);
       return this.http.get<any>(`${environment.apiPath}/admin/user/email/${username}`)
           .pipe(map(user => {
