@@ -81,6 +81,20 @@ public class UserController {
         return new ResponseEntity<List<User>>(doctorList,HttpStatus.OK);
     }
 
+    @GetMapping("/public/user/doctor")
+    public ResponseEntity<List<User>> getAllDoctor(){
+        List<User> userList = userRep.findAll();
+        List<User> doctorList = new ArrayList<User>();
+        for (User user : userList) {
+            if (user.getRole()==Role.Doctor)
+                doctorList.add(user);
+        }
+        if(doctorList.size() <1){
+            return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<User>>(doctorList,HttpStatus.OK);
+    }
+
     @GetMapping("/admin/user/role/{role}")
     public ResponseEntity<List<User>> getByRole(@PathVariable String role){
         try {
