@@ -124,8 +124,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
         Optional<Center> center = centerRep.findById(centerId);
-        if(!center.isPresent() || !target.isPresent() || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !(target.get().getCenter().equals(user.get().getCenter()) && user.get().getRole() == Role.Administrator)) 
+        if(!center.isPresent() || !target.isPresent())
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        boolean isSameCenter = target.get().getCenter().getId().equals(user.get().getCenter().getId()) && user.get().getRole().equals(Role.Administrator);
+        if(!user.isPresent() || (user.get().getRole() != Role.SuperAdministrator && !isSameCenter))
+            return new ResponseEntity<User>(HttpStatus.FORBIDDEN);            
         target.get().setFirstName(firstName);
         target.get().setLastName(lastName);
         target.get().setCenter(center.get());
