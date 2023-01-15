@@ -4,13 +4,13 @@
             <h1 class="d-flex justify-content-center text-primary">Register a doctor</h1>
             <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="username" class="text-secondary" >Username</label>
+                    <label for="username" class="text-secondary" >Email</label>
                     <input type="text" formControlName="username" class="form-control" [ngClass]="{'is-invalid' : submitted && username?.errors?.['required']}">
                     <div *ngIf="submitted && username?.errors?.['required']" class="text-danger">
-                        Username is required !
+                        User email is required !
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="isSignIn">
                     <label for="password" class="text-secondary">Password</label>
                     <input type="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid' : submitted && password?.errors?.['required']}">
                     <div *ngIf="submitted && password?.errors?.['required']" class="text-danger">
@@ -29,6 +29,15 @@
                     <input type="text" formControlName="lastname" class="form-control" [ngClass]="{'is-invalid' : submitted && lastname?.errors?.['required']}">
                     <div *ngIf="submitted && lastname?.errors?.['required']" class="text-danger">
                         Your last name is required !
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="center" class="text-secondary">Center</label>
+                    <select formControlName="center" class="form-control" [ngClass]="{'is-invalid' : submitted && center?.errors?.['required']}">
+                        <option *ngFor="let xcenter of centers" [value]="xcenter.name">{{xcenter.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && center?.errors?.['required']" class="text-danger">
+                        Required !
                     </div>
                 </div>
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>

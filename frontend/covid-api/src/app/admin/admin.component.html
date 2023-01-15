@@ -34,21 +34,23 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Fist Name</th>
+                        <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Emai</th>
+                        <th>Email</th>
                         <th>Phone number</th>
+                        <th>Center</th>
                         <th><a class="btn btn-primary" style="border-radius: 50%;" href="/signin">+</a></th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let user of users">
                     <tr>
-                        <td>{{user.firstname}}</td>
-                        <td>{{user.lastname}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.phone}}</td>
+                        <td>{{user.center?.name}}</td>
                         <td>
-                            <a class="btn btn-primary" href=""></a>
+                            <a class="btn btn-primary" href="/signin/{{user.id}}">Edit</a>
                         </td>
                     </tr>
                 </tbody>

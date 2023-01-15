@@ -12,6 +12,10 @@ export class UserService {
 }
 
   getAll(){
-    return this.http.get<User[]>(`${environment.apiPath}/public/user`)
+    return this.http.get<User[]>(`${environment.apiPath}/admin/user`);
+  }
+
+  getById(id:bigint){
+    return this.http.get<User>(`${environment.apiPath}/admin/user/${id}`);
   }
 }

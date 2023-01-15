@@ -12,8 +12,23 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     let user = this.authService.userValue;
+    let roles = "Doctor" || "Administrator" || "SuperAdministrator";
     if(user){
       this.isLogged = true;
+      switch(user.role && roles){
+        case "Doctor" : 
+          this.activeRole = "Doctor";
+        break;
+        case "Administrator" :
+          this.activeRole = "Administrator";
+        break; 
+
+        case "SuperAdministrator" : 
+          this.activeRole = "SuperAdministrator";
+        break;
+        default: 
+        break;
+      }
     }else{
       this.isLogged = false;
     }
@@ -21,6 +36,7 @@ export class BannerComponent implements OnInit {
 
   title = 'THE covid web app, you mad lad';
   isLogged: boolean = false;
+  activeRole: string = "";
 
   getRoutePath(){
     const routepath = window.location.pathname;
