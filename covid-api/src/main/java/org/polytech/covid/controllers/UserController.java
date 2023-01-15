@@ -24,6 +24,7 @@ import org.polytech.covid.entities.Role;
 import org.polytech.covid.repositories.UserRepository;
 import org.polytech.covid.entities.Center;
 import org.polytech.covid.repositories.CenterRepository;
+import org.polytech.covid.services.UserService;
 
 @RestController
 @RequestMapping("/admin/user")
@@ -32,6 +33,8 @@ public class UserController {
     private UserRepository userRep;
     @Autowired
     private CenterRepository centerRep;
+    @Autowired
+    private UserService userService;
 
     @RolesAllowed("SuperAdministrator")
     @GetMapping("")
@@ -72,7 +75,7 @@ public class UserController {
     @RolesAllowed("SuperAdministrator")
     @GetMapping("/center/{center_id}/{role}")
     public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long centerId ){
-        List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, centerId);
+        List<User> userList = userRep.findDistinctByRoleAndCenterId(role, centerId);
         if(userList.size() <1){
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
@@ -92,6 +95,25 @@ public class UserController {
         userRep.save(newUser);
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
+
+    @RolesAllowed("SuperAdministrator")
+    @PostMapping("/SuperAdministrator")
+    public void newSuperAdministrator (){
+        userService.createSuperAdminDefault();
+    }
+
+    @RolesAllowed("SuperAdministrator")
+    @PostMapping("/Administrator")
+    public void newAdministrator (){
+        userService.createAdminDefault();
+    }
+
+    @RolesAllowed("SuperAdministrator")
+    @PostMapping("/Doctor")
+    public void newSDoctor (){
+        userService.createDoctorDefault();
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestParam String firstName, String lastName, Long centerId, @PathVariable long id){

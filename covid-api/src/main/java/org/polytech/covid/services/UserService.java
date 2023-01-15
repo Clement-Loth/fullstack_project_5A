@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getDoctorsByCenter(Center center){
-        return this.userRepository.findDistinctByRoleAndCenter_Id(
+        return this.userRepository.findDistinctByRoleAndCenterId(
                 Role.Doctor,
                 center.getId()
         );
@@ -44,16 +44,32 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     public void createSuperAdminDefault() {
-        if(userRepository.findByEmail("test@toto.fr").isEmpty()){
+        createUser("test@toto.fr","toto","Test","Test","0",Role.SuperAdministrator);
+    }
+
+    @PostConstruct
+    public void createAdminDefault() {
+        createUser("admin@toto.fr","toto","Test","Test","0",Role.Administrator);
+    }
+
+    @PostConstruct
+    public void createDoctorDefault() {
+        createUser("doc@toto.fr","toto","Test","Test","0",Role.Doctor);
+    }
+
+    public boolean createUser(String email, String password, String firstName, String lastName, String phone, Role role) {
+        if(userRepository.findByEmail(email).isEmpty()){
             User superAdmin = new User();
-            superAdmin.setEmail("test@toto.fr");
-            superAdmin.setFirstName("Test");
-            superAdmin.setLastName("Test");
-            superAdmin.setPassword(passwordEncoder.encode("toto"));
-            superAdmin.setPhone("0");
-            superAdmin.setRole(Role.SuperAdministrator);
+            superAdmin.setEmail(email);
+            superAdmin.setFirstName(firstName);
+            superAdmin.setLastName(lastName);
+            superAdmin.setPassword(passwordEncoder.encode(password));
+            superAdmin.setPhone(phone);
+            superAdmin.setRole(role);
             this.userRepository.save(superAdmin);
+            return true;
         }
+        return false;
     }
 
     @Override

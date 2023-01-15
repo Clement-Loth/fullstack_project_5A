@@ -51,7 +51,7 @@ public class AppointmentController {
 
     @GetMapping("/admin/app/doctor/{doctor_id}")
     public ResponseEntity<List<Appointment>> getByDoctor(@PathVariable Long doctorId){
-        List<Appointment> appList = appRep.findAllByDoctor_id(doctorId);
+        List<Appointment> appList = appRep.findAllByDoctorId(doctorId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRep.findByEmail(authentication.getName());
         if(appList.size()<1 || !user.isPresent() || user.get().getRole() != Role.SuperAdministrator && !doctorId.equals(user.get().getId())) 
@@ -71,7 +71,7 @@ public class AppointmentController {
 
     @GetMapping("/admin/app/center/{center_id}")
     public ResponseEntity<List<Appointment>> getByCenter(@PathVariable Long centerId){
-        List<Appointment> appList = appRep.findAllByCenter_id(centerId);
+        List<Appointment> appList = appRep.findAllByCenterId(centerId);
         if(appList.size() <1){
             return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }
