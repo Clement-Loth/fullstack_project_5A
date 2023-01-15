@@ -72,7 +72,7 @@ public class UserController {
     @RolesAllowed("SuperAdministrator")
     @GetMapping("/center/{center_id}/{role}")
     public ResponseEntity<List<User>> getByDistinctByRoleAndCenter(@PathVariable Role role, Long centerId ){
-        List<User> userList = userRep.findDistinctByRoleAndCenter_Id(role, centerId);
+        List<User> userList = userRep.findDistinctByRoleAndCenterId(role, centerId);
         if(userList.size() <1){
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
