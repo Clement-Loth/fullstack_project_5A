@@ -16,6 +16,7 @@ INSERT INTO CENTERS (name, location, state, city, disabled) VALUES
 
 DROP TYPE IF EXISTS ROLE CASCADE;
 CREATE TYPE ROLE as ENUM('Administrator','Doctor','SuperAdministrator');
+CREATE CAST (character varying as ROLE) WITH INOUT AS IMPLICIT;
 DROP TABLE IF EXISTS USERS CASCADE;
 CREATE TABLE USERS(
 	id bigserial PRIMARY KEY,
